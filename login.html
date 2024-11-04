@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="css/global.css"/>
+    <link rel="stylesheet" href="css/login.css"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/logo/mclogo_bl.jpeg"/><title>Login</title>
+</head>
+<body>
+    <form>
+    <div class="login container">
+        <p class="subheading">Login with your Instagram account</p>
+        
+        <input type="text" class="textbox inpt-logn" placeholder="   Username, phone or email"/>
+        <input type="password" class="textbox inpt-logn" placeholder="   Password"/>
+        <input type="submit" id="login-btn" class="login-btn" value="Log In"/>
+        
+        <a href="stuck.html" >Forgot password?</a>
+        <div class="or">
+            <hr class="line">
+            <span class="or-text">or</span>
+            <hr class="line">
+        </div>
+        <a href="https://www.instagram.com">
+            <div class="inst-btn">
+                <img alt="instagram" src="img/logo/ig-crop.png" class="ig"><p> Continue with Instagram</p><p class="nxt">></p>
+            </div>
+        </a>
+    </div>
+</form>
+<div class="footer">
+    <p>© 2024 </p>
+    <a href="">Threads Terms</a>
+    <a href="">Privacy Policy</a>
+    <a href="">Cookes Policy</a>
+    <a href="">Report a problem</a>
+</div>
+</body>
+<script>
+    var login_btn=document.getElementById("login-btn");
+    login_btn.addEventListener('click',()=>{
+        window.open("home.html","_blank");
+    });
+</script>
+</html>
