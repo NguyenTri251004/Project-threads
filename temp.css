@@ -1,0 +1,25 @@
+.picture {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    text-align: center;
+    align-items: center;
+    background-color: black;
+}
+.container-fluid {
+    position: relative;
+    text-align: center;
+    align-items: center;
+    background-color: black;
+}
+
+.login {
+    position: absolute;
+    top:1rem;
+}
+
+.login-head {
+    color: white;
+}
