@@ -112,7 +112,6 @@ div {
     align-items: center;
 }
 .section-one .container .header {
-    position: sticky; 
     top: 0;  
     display: flex;
     justify-content: center; 
@@ -151,8 +150,12 @@ div {
     background: var(--color-bg-status);
 }
 
-.inner-profile {
+.inner-profile-head {
     padding: 16px 24px 10px;
+}
+
+.inner-profile-follower, .modify-profile {
+    margin: 0 24px;
 }
 
 .inner-profile-head {
@@ -201,12 +204,16 @@ div {
 }
 
 .thread {
-    margin-top: 1rem;
+    margin: 1rem;
     text-align: center;
     font-weight: bold;
 }
 
 .create-thread  {
+    border-top:  1px solid #474747;
+    border-bottom:  1px solid #474747;
+    padding-top:  1rem;
+    padding-bottom: 1rem;
     margin: 0 1rem;
     display: flex;
 }
@@ -228,4 +235,72 @@ div {
 .create-thread-middle {
     margin: 0.5rem 1rem;
     width: 450px;
+    color: #474747
+}
+
+.create-thread-submit {
+    border: 0.5px solid #282828;
+    border-radius: 12px;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+
+}
+
+.container-post  {
+    margin: 1rem;
+}
+
+.inner-content {
+    position: relative;
+}
+
+.inner-image {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 0;
+    left: 0;
+    
+}
+
+.inner-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.inner-name {
+    margin-left: 50px;
+    margin-bottom: 10px;
+}
+
+.user-name {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.time {
+    color: var(--color-icons);
+}
+
+.inner-tus {
+    margin-left: 40px;
+    margin-bottom: 20px;
+}
+
+.section-one .container .inner-status .inner-content .inner-tus span {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.inner-reaction {
+    display: flex;
+    margin-left: 28px;
+    margin-top: 10px;
+    justify-content: flex-start;
+}
+
+.inner-love, .inner-comment, .inner-repost, .inner-direct {
+    padding: 0 1rem;
 }
