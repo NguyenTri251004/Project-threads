@@ -22,3 +22,6 @@ img {
     width: 36px;
     height: 36px;
 }
+a{
+    text-decoration: none;
+}

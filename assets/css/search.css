@@ -30,10 +30,6 @@
     font-size: 24px;
 }
 
-.inner-taskbar .inner-menu .inner-plus {
-    position: relative; 
-}
-
 .inner-taskbar .inner-menu .inner-plus::before {
     content: "";
     position: absolute;
@@ -245,6 +241,7 @@ div.hover-2:hover i {
 .button i {
     font-size: 20px;
 }
+/* End Button Create Threads */
 @media (max-width: 700px) {
     .button {
         display: none !important;
