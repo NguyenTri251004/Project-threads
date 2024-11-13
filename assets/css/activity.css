@@ -102,56 +102,24 @@ div.hover-2:hover i {
 }
 /* End  Taskbar */
 
-
 /* Search */
-.search {
+.activity {
     width: 680px;
 }
-.search .container .header {
+.activity .container .header {
     height: 40px;
 }
-.search .container .section-search {
+.activity .container .section-activity {
     border: 1px solid #2D2D2D ; 
     background-color: var(--color-bg-status);
     border-radius: 20px;
 }
-.search .container .section-search .search-box {
-    height: 73px;
-    padding: 18px 24px 4px;
-}
 
-.search .container .section-search .search-box .container-search-box {
-    border: 1px solid #383939;
-    border-radius: 20px;
-    padding: 10px 8px;
-    background: #0A0A0A;
-}
-.search .container .section-search .search-box .container-search-box i {
-    width: 32px;
-    height: 32px;
-    padding: 8px;
-    color: #616161;
-}
-.search .container .section-search .search-box .container-search-box input {
-    color: #616161;
-    border: none;
-    outline: none;
-    background: #0A0A0A;
-}
-
-.search .container .section-search .follow-sugg {
-    height: 43px;
-    padding: 16px 24px 6px;
-}
-.search .container .section-search .follow-sugg span {
-    color: #777777;
-}
-
-.search .container .container-post {
+.activity .container .container-post {
     height: 100px;
     padding: 16px 0px 0px 24px;
 }
-.search .container .header .inner-bars {
+.activity .container .header .inner-bars {
     width: 48px;
     height: 48px;
     top: 50%;
@@ -163,47 +131,55 @@ div.hover-2:hover i {
     }
 }
 
-.search .container .container-post .inner-content {
+.activity .container .container-post .inner-content {
     height: auto;
     border-bottom: 1px solid #383939;
     padding: 0px 24px 0px 0px;
 }
-.search .container .container-post .inner-image {
+.activity .container .container-post .inner-image {
     width: 36px;
     height: 36px;
     margin-right: 10px;
 }
-.search .container .container-post .inner-content .inner-name .sub-name {
+.activity .container .container-post .inner-content .inner-name .sub-title {
     color: #777777;
 }
-.search .container .container-post .inner-content .inner-follow {
+
+.activity .container .container-post .inner-content .inner-name div {
+    margin-bottom: 10px;
+}
+
+.activity .container .container-post .inner-content .inner-name div .time {
+    color: #777777;
+}
+
+.activity .container .container-post .inner-content .inner-follow {
     width: 104px;
     height: 34px;
     border: 1px solid #383939;
     border-radius: 8px;
     cursor: pointer;
 }
-.search .container .container-post .inner-content .inner-fler {
+.activity .container .container-post .inner-content .inner-activity-content {
     margin-top: 12px;
 }
 
 @media (max-width: 700px) {
-    .search .container .header .inner-content span {
+    .activity .container .header .inner-content span {
         display: none !important ;
-        
     }
-    .search .container .header .inner-content .inner-logo {
+    .activity .container .header .inner-content .inner-logo {
         display: flex !important ;
         width: 76px;
         height: 76px;
         padding: 15px 0;
     }
-    .search .container .header .inner-content .inner-logo .bi-threads {
+    .activity .container .header .inner-content .inner-logo .bi-threads {
         color: #FFF;
         width: 32px;
         height: 32px;
     }
-    .search .container .header {
+    .activity .container .header {
         position: fixed !important;
         height: 60px;
         top: 0;
@@ -211,24 +187,58 @@ div.hover-2:hover i {
         background: #0A0A0A;
         z-index: 10;
     }
-    .search {
+    .activity {
         width: 100% !important;
         margin: 0;
         margin-top: 60px !important;
         z-index: 5;
     }
-    .search .container {
+    .activity .container {
         padding: 0 ;
         margin: 0;
         max-width: 100%;
     }
-    .search .container .header .inner-bars {
+    .activity .container .section-activity {
+        background: #101010 !important;
+    }
+    .activity .container .header .inner-bars {
         display: flex !important;
     }
+    .activity .container .section-activity .filter {
+        display: flex !important;
+        overflow-x: auto; 
+        overflow-y: hidden;
+        white-space: nowrap;
+        gap: 5px;
+        width: 100%;
+        height: 57px;
+        margin: 0px 0px 4px;
+        align-items: center;
+    }
+    .activity .container .filter div {
+        min-width: 100px;
+        min-height: 34px;
+        display: flex;
+        text-align: center;
+        align-items: center;
+        background: #101010;
+        border: 1px solid #777777;
+        border-radius: 8px;
+        flex-shrink: 0;
+        a {
+            width: 100%;
+            color: #FFF;
+            font-weight: 500;
+        }
+    }
+    .activity .container .filter .all {
+        background: #FFF;
+        a {
+            color: black;
+        }
+    }
 }
-/* End Sreach */
-
-
+/* End Activity */
 /* Button Create Threads */
 .button {
     width: 82px;
@@ -243,9 +253,9 @@ div.hover-2:hover i {
 .button i {
     font-size: 20px;
 }
-/* End Button Create Threads */
 @media (max-width: 700px) {
     .button {
         display: none !important;
     }
 }
+/* End Button Create Threads */
