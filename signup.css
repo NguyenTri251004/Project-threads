@@ -56,12 +56,13 @@ body {
     border-radius: 20px;
     width: 370px;
     height: 50px;
-    margin-top: 1rem;
+    margin: 1rem 0;
     text-align: center;
     align-items: center;
     line-height: 50px;
     color: rgb(158,158,164);
 }
+
 
 
 
