@@ -243,6 +243,9 @@ div {
 }
 
 .create-thread-submit {
+    position: absolute;
+    top: 0.5rem;
+    right: 0;
     border: 0.5px solid #282828;
     border-radius: 12px;
     font-weight: bold;
