@@ -54,11 +54,13 @@
     font-size: 24px;
 }
 
-div.hover-1 {
+.hover-1 {
     position: relative; 
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
-div.hover-1:hover:before {
+.hover-1:hover:before {
     content: "";
     position: absolute;
     top: 0;
@@ -249,7 +251,7 @@ div.hover-2:hover i {
         background: #0A0A0A;
         flex-direction: column;
         z-index: 10;
-        .inner-bars {
+        .inner-bars-mobile {
             display: flex !important;
             top: 15px;
             right: 15px;
@@ -331,3 +333,127 @@ div.hover-2:hover i {
     }
 }
 /* End Button Create Threads */
+
+/* Inner-bars show  */
+.inner-bars-show {
+    width: 240px;
+    height: 293px;
+    background: #181818;
+    border: 1px solid #2D2D2D;
+    border-radius: 16px;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    display: none;
+    z-index: 10;
+}
+.inner-bars-show.active {
+    display: flex; 
+}
+.inner-bars-show .container-fluid .inner-bars-top {
+    flex: 3;
+    padding: 10px;
+    border-bottom: 1px solid #2D2D2D ;
+}
+
+.inner-bars-show .container-fluid .inner-bars-bottom {
+    flex: 2;
+    padding: 10px;
+}
+
+.inner-bars-show .container-fluid .inner-bars-top div, .inner-bars-show .container-fluid .inner-bars-bottom div {
+    flex: 1;
+    font-weight: 500;
+    padding-left: 10px;
+    cursor: pointer;
+    z-index: 1;
+} 
+
+.inner-bars-show .container-fluid .inner-bars-bottom .log-out {
+    color: red;
+}
+
+.inner-bars-show .hover-1:hover:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0; 
+    bottom: 0; 
+    background: #212121;
+    border-radius: 10px;
+    z-index: -1; 
+}
+@media (max-width: 700px) {
+    .inner-bars-show {
+        bottom: unset;
+        left: unset;
+        top: 60px;
+        right: 5px;
+    }
+}
+/* End Inner-bars show */
+
+/* Inner pin show */
+.inner-pin-show {
+    width: 388px;
+    height: 535px;
+    background: #181818;
+    border: 1px solid #2D2D2D;
+    border-radius: 16px;
+    position: absolute;
+    bottom: 120px;
+    left: 20px;
+    z-index: 10;
+    display: none;
+}
+.inner-pin-show .container-fluid div{
+    display: flex;
+    flex: 1;
+    width: 100%;
+    align-items: center;
+    font-weight: 500;
+    padding: 12px
+}
+.inner-pin-show .container-fluid .header div {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+.inner-pin-show .container-fluid .form {
+    padding: 0px 16px 4px;
+}
+
+.inner-pin-show .container-fluid .form .container-form {
+    background: #0A0A0A;
+    border: 1px solid #2D2D2D;
+    border-radius: 16px;
+    padding: 8px;
+    input {
+        color : #777777;
+        font-weight: normal;
+        background: #0A0A0A;
+        outline: none;
+        border: none;
+        margin-left: 10px;
+    }
+}
+.inner-pin-show.active {
+    display: flex; 
+}
+.inner-pin-show .hover-1 {
+    cursor: pointer;
+}
+.inner-pin-show .hover-1:hover:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0; 
+    bottom: 0; 
+    background: #212121;
+    border-radius: 10px;
+    z-index: -1; 
+}
+/* End Inner pin show */
