@@ -1,0 +1,261 @@
+/* Taskbar */
+.homepage .inner-taskbar {
+    height: 100vh;
+    width: 76px;
+    background: var(--color-bg);
+    top: 0;
+    left: 0;
+    padding: 5px;
+} 
+
+.inner-taskbar .inner-logo {
+    width: 76px;
+    height: 76px;
+    padding: 15px 0;
+}
+.inner-taskbar .inner-logo .bi-threads {
+    color: #FFF;
+    width: 32px;
+    height: 32px;
+}
+
+.inner-taskbar .inner-menu div {
+    height: 60px;
+    align-content: center;
+    margin: 5px 0;
+    padding: 10px 0px;
+}
+.inner-taskbar .inner-menu div i {
+    color: var(--color-icons);
+    font-size: 24px;
+}
+
+.inner-taskbar .inner-menu .inner-plus::before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 0;
+    right: 0; 
+    bottom: 5px; 
+    /* background: transparent;  */
+    background: #171717;
+    border-radius: 10px; 
+    z-index: -1; 
+}
+
+.homepage .inner-taskbar .inner-link div {
+    height: 60px;
+    align-content: center;
+    margin: 5px 0;
+}
+
+.homepage .inner-taskbar .inner-link  i {
+    color: var(--color-icons);
+    font-size: 24px;
+}
+
+div.hover-1 {
+    position: relative; 
+}
+
+div.hover-1:hover:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0; 
+    bottom: 0; 
+    background: #171717;
+    border-radius: 10px;
+    z-index: -1; 
+    /* transition: all 0.3s ease;  */
+}
+
+div.hover-2:hover i {
+    color: #FFF !important;
+}
+@media (max-width: 700px) {
+    .container-fluid {
+        padding: 0 !important ;
+    }
+    .homepage {
+        flex-direction: column;
+    }
+    .homepage .inner-taskbar .inner-link {
+        display: none !important;
+    }
+    .homepage .inner-taskbar .inner-logo {
+        display: none !important;
+    }
+    .container-fluid .homepage .inner-taskbar { 
+        position: fixed !important;
+        bottom: 0 !important;
+        top: unset;
+        width: 100% !important;
+        height: 70px !important; 
+        background: var(--color-bg) !important; 
+        z-index: 10 !important;
+    }
+    .homepage .inner-taskbar .inner-menu {
+        flex-direction: row !important;
+    }
+}
+/* End  Taskbar */
+
+/* Search */
+.activity {
+    width: 680px;
+}
+.activity .container .header {
+    height: 40px;
+}
+.activity .container .section-activity {
+    border: 1px solid #2D2D2D ; 
+    background-color: var(--color-bg-status);
+    border-radius: 20px;
+}
+
+.activity .container .container-post {
+    height: 100px;
+    padding: 16px 0px 0px 24px;
+}
+.activity .container .header .inner-bars {
+    width: 48px;
+    height: 48px;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    i {
+        color: var(--color-icons)
+    }
+}
+
+.activity .container .container-post .inner-content {
+    height: auto;
+    border-bottom: 1px solid #383939;
+    padding: 0px 24px 0px 0px;
+}
+.activity .container .container-post .inner-image {
+    width: 36px;
+    height: 36px;
+    margin-right: 10px;
+}
+.activity .container .container-post .inner-content .inner-name .sub-title {
+    color: #777777;
+}
+
+.activity .container .container-post .inner-content .inner-name div {
+    margin-bottom: 10px;
+}
+
+.activity .container .container-post .inner-content .inner-name div .time {
+    color: #777777;
+}
+
+.activity .container .container-post .inner-content .inner-follow {
+    width: 104px;
+    height: 34px;
+    border: 1px solid #383939;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.activity .container .container-post .inner-content .inner-activity-content {
+    margin-top: 12px;
+}
+
+@media (max-width: 700px) {
+    .activity .container .header .inner-content span {
+        display: none !important ;
+    }
+    .activity .container .header .inner-content .inner-logo {
+        display: flex !important ;
+        width: 76px;
+        height: 76px;
+        padding: 15px 0;
+    }
+    .activity .container .header .inner-content .inner-logo .bi-threads {
+        color: #FFF;
+        width: 32px;
+        height: 32px;
+    }
+    .activity .container .header {
+        position: fixed !important;
+        height: 60px;
+        top: 0;
+        left: 0;
+        background: #0A0A0A;
+        z-index: 10;
+    }
+    .activity {
+        width: 100% !important;
+        margin: 0;
+        margin-top: 60px !important;
+        z-index: 5;
+    }
+    .activity .container {
+        padding: 0 ;
+        margin: 0;
+        max-width: 100%;
+    }
+    .activity .container .section-activity {
+        background: #101010 !important;
+    }
+    .activity .container .header .inner-bars {
+        display: flex !important;
+    }
+    .activity .container .section-activity .filter {
+        display: flex !important;
+        overflow-x: auto; 
+        overflow-y: hidden;
+        white-space: nowrap;
+        gap: 5px;
+        width: 100%;
+        height: 57px;
+        margin: 0px 0px 4px;
+        align-items: center;
+    }
+    .activity .container .filter div {
+        min-width: 100px;
+        min-height: 34px;
+        display: flex;
+        text-align: center;
+        align-items: center;
+        background: #101010;
+        border: 1px solid #777777;
+        border-radius: 8px;
+        flex-shrink: 0;
+        a {
+            width: 100%;
+            color: #FFF;
+            font-weight: 500;
+        }
+    }
+    .activity .container .filter .all {
+        background: #FFF;
+        a {
+            color: black;
+        }
+    }
+}
+/* End Activity */
+/* Button Create Threads */
+.button {
+    width: 82px;
+    height: 68px;
+    border: 1px solid #383839;
+    background: #181818;
+    border-radius: 15px;
+    right: 20px;
+    bottom: 20px;
+    cursor: pointer;
+}
+.button i {
+    font-size: 20px;
+}
+@media (max-width: 700px) {
+    .button {
+        display: none !important;
+    }
+}
+/* End Button Create Threads */
