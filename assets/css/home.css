@@ -29,7 +29,6 @@
     color: var(--color-icons);
     font-size: 24px;
 }
-
 .inner-taskbar .inner-menu .inner-plus::before {
     content: "";
     position: absolute;

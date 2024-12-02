@@ -10,9 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />  
-    <link rel="stylesheet" href="./assets/css/reset.css">
-    <link rel="stylesheet" href="./assets/css/base.css">
-    <link rel="stylesheet" href="./assets/css/home.css">
+    <link rel="stylesheet" href="/assets/css/reset.css">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="stylesheet" href="/assets/css/home.css">
  </head>
   <body>
     <div class="container-fluid">
@@ -336,36 +336,5 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script>
-        function showInnerBars() {
-            const menu = document.querySelector('.inner-bars-show');
-            menu.classList.toggle('active'); 
-        }
-        document.addEventListener('click', function (event) {
-        const menu = document.querySelector('.inner-bars-show');
-        let trigger;
-        if (window.innerWidth <= 700) { 
-        trigger = document.querySelector('.inner-bars-mobile');
-        } else { 
-        trigger = document.querySelector('.inner-bars');
-}
-        if (!menu.contains(event.target) && !trigger.contains(event.target)) {
-        menu.classList.remove('active'); 
-        }
-    });
-        //-------------------------------------------------------------------------
-        function showInnerPin() {
-            const menu = document.querySelector('.inner-pin-show');
-            menu.classList.toggle('active');
-        }
-        document.addEventListener('click', function (event) {
-        const menu = document.querySelector('.inner-pin-show');
-        let trigger;
-        trigger = document.querySelector('.inner-pin');
-        if (!menu.contains(event.target) && !trigger.contains(event.target)) {
-            menu.classList.remove('active'); 
-        }
-    });
-    </script>
 </body>
 </html>

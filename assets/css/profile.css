@@ -1,0 +1,349 @@
+div {
+    display: block;
+}
+
+.container-fluid .homepage {
+    display: flex;
+    justify-content: space-between;
+}
+/* Taskbar */
+.homepage .inner-taskbar {
+    height: 100vh;
+    width: 76px;
+    background: var(--color-bg);
+    top: 0;
+    left: 0;
+    padding: 5px;
+} 
+
+.inner-taskbar .inner-logo {
+    width: 76px;
+    height: 76px;
+    padding: 15px 0;
+}
+.inner-taskbar .inner-logo .bi-threads {
+    color: #FFF;
+    width: 32px;
+    height: 32px;
+}
+
+.inner-taskbar .inner-menu div {
+    height: 60px;
+    align-content: center;
+    margin: 5px 0;
+    padding: 10px 0px;
+}
+.inner-taskbar .inner-menu div i {
+    color: var(--color-icons);
+    font-size: 24px;
+}
+
+.inner-taskbar .inner-menu .inner-plus::before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 0;
+    right: 0; 
+    bottom: 5px; 
+    /* background: transparent;  */
+    background: #171717;
+    border-radius: 10px; 
+    z-index: -1; 
+}
+
+.homepage .inner-taskbar .inner-link div {
+    height: 60px;
+    align-content: center;
+    margin: 5px 0;
+}
+
+.homepage .inner-taskbar .inner-link  i {
+    color: var(--color-icons);
+    font-size: 24px;
+}
+
+.hover-1 {
+    position: relative; 
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.hover-1:hover:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0; 
+    bottom: 0; 
+    background: #171717;
+    border-radius: 10px;
+    z-index: -1; 
+    /* transition: all 0.3s ease;  */
+}
+
+div.hover-2:hover i {
+    color: #FFF !important;
+}
+
+/**/
+
+.section-one .container {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.section-one .container .header {
+    top: 0;  
+    display: flex;
+    justify-content: center; 
+    text-align: center;
+    height: 60px;
+    width: 100%;
+    align-items: center;
+    background: var(--color-bg);
+    z-index: 999;
+}
+
+.section-one .container .header a {
+    Text-decoration: none;
+}
+
+.section-one .container .header span {
+    color: var(--color--text);
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.section-one { 
+    width: 700px; 
+
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    margin: 0 auto; 
+}
+
+.profile, .inner-profile {
+    width:700px;
+    height: 100%;
+    border-radius: 20px 20px 0 0;
+    border: 1px solid #2D2D2D;
+    background: var(--color-bg-status);
+}
+
+.inner-profile-head {
+    padding: 16px 24px 10px;
+}
+
+.inner-profile-follower, .modify-profile {
+    margin: 0 24px;
+}
+
+.inner-profile-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) max-content;
+    max-height: 150px;
+}
+
+.name {
+    font-size:xx-large;
+    font-weight: bold;
+    grid-column-start: 1;
+}
+
+.profile-pic {
+    width: 80px;
+    height: 80px;
+    top: 0;
+    left: 0;
+    grid-column-start: 2;
+}
+
+.profile-pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.inner-profile-follower {
+    margin-top: 1rem;
+    color: #474747
+}
+
+.modify-profile {
+    font-weight: bold;
+    height: 40px;
+    border: 0.5px solid #282828;
+    border-radius: 12px;
+    margin-top: 30px;
+    text-align: center;
+    align-items: center;
+    outline: none;
+    box-shadow: none;
+    line-height: 40px;
+}
+
+.thread {
+    margin: 1rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.create-thread  {
+    border-top:  1px solid #474747;
+    border-bottom:  1px solid #474747;
+    padding-top:  1rem;
+    padding-bottom: 0.5rem;
+    margin: 0 1rem;
+    position: relative;
+    display: flex;
+}
+
+.create-thread-logo {
+    margin:10px 0;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 0;
+    left: 0;
+}
+
+.create-thread-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.create-thread-middle {
+    margin-left: 50px;
+    margin-bottom: 10px;
+    width: 400px;
+    color: #474747
+}
+
+.create-thread-submit {
+    position: absolute;
+    top: 0.5rem;
+    right: 0;
+    border: 0.5px solid #282828;
+    border-radius: 12px;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    display: flex;
+    margin-right: 10px;
+}
+
+.container-post  {
+    margin: 1rem;
+}
+
+.inner-content {
+    position: relative;
+}
+
+.inner-image {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 0;
+    left: 0;
+    
+}
+
+.inner-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.inner-name {
+    margin-left: 50px;
+    margin-bottom: 10px;
+}
+
+.user-name {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.time {
+    color: var(--color-icons);
+}
+
+.inner-tus {
+    margin-left: 40px;
+    margin-bottom: 20px;
+}
+
+.section-one .container .inner-status .inner-content .inner-tus span {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.inner-reaction {
+    display: flex;
+    margin-left: 28px;
+    margin-top: 10px;
+    justify-content: flex-start;
+}
+
+.inner-love, .inner-comment, .inner-repost, .inner-direct {
+    padding: 0 1rem;
+}
+
+@media (max-width: 700px) {
+    .container-fluid {
+        padding: 0 !important ;
+    }
+    .homepage {
+        flex-direction: column;
+    }
+    .homepage .inner-taskbar .inner-link {
+        display: none !important;
+    }
+    .homepage .inner-taskbar .inner-logo {
+        display: none !important;
+    }
+    .container-fluid .homepage .inner-taskbar { 
+        position: fixed !important;
+        bottom: 0 !important;
+        top: unset;
+        width: 100% !important;
+        height: 70px !important; 
+        background: var(--color-bg) !important; 
+        z-index: 10 !important;
+    }
+    .homepage .inner-taskbar .inner-menu {
+        flex-direction: row !important;
+    }
+
+    .section-one, .container, .profile, .inner-profile {
+        width: 100%;
+        max-width: unset;
+        padding: unset;
+    }
+}
+
+/* Button Create Threads */
+.button {
+    width: 82px;
+    height: 68px;
+    border: 1px solid #383839;
+    background: #181818;
+    border-radius: 15px;
+    right: 20px;
+    bottom: 20px;
+    cursor: pointer;
+}
+.button i {
+    font-size: 20px;
+}
+@media (max-width: 700px) {
+    .button {
+        display: none !important;
+    }
+}
