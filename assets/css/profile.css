@@ -6,87 +6,7 @@ div {
     display: flex;
     justify-content: space-between;
 }
-/* Taskbar */
-.homepage .inner-taskbar {
-    height: 100vh;
-    width: 76px;
-    background: var(--color-bg);
-    top: 0;
-    left: 0;
-    padding: 5px;
-} 
-
-.inner-taskbar .inner-logo {
-    width: 76px;
-    height: 76px;
-    padding: 15px 0;
-}
-.inner-taskbar .inner-logo .bi-threads {
-    color: #FFF;
-    width: 32px;
-    height: 32px;
-}
-
-.inner-taskbar .inner-menu div {
-    height: 60px;
-    align-content: center;
-    margin: 5px 0;
-    padding: 10px 0px;
-}
-.inner-taskbar .inner-menu div i {
-    color: var(--color-icons);
-    font-size: 24px;
-}
-
-.inner-taskbar .inner-menu .inner-plus::before {
-    content: "";
-    position: absolute;
-    top: 5px;
-    left: 0;
-    right: 0; 
-    bottom: 5px; 
-    /* background: transparent;  */
-    background: #171717;
-    border-radius: 10px; 
-    z-index: -1; 
-}
-
-.homepage .inner-taskbar .inner-link div {
-    height: 60px;
-    align-content: center;
-    margin: 5px 0;
-}
-
-.homepage .inner-taskbar .inner-link  i {
-    color: var(--color-icons);
-    font-size: 24px;
-}
-
-.hover-1 {
-    position: relative; 
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-.hover-1:hover:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0; 
-    bottom: 0; 
-    background: #171717;
-    border-radius: 10px;
-    z-index: -1; 
-    /* transition: all 0.3s ease;  */
-}
-
-div.hover-2:hover i {
-    color: #FFF !important;
-}
-
-/**/
-
+/* Section one */
 .section-one .container {
 
     display: flex;
@@ -327,6 +247,7 @@ div.hover-2:hover i {
         padding: unset;
     }
 }
+/* End Section one */
 
 /* Button Create Threads */
 .button {
