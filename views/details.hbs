@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />  
     <link rel="stylesheet" href="/assets/css/reset.css">
     <link rel="stylesheet" href="/assets/css/base.css">
-    <link rel="stylesheet" href="/assets/css/home.css">
+    <link rel="stylesheet" href="/assets/css/details.css">
  </head>
   <body>
     <div class="container-fluid">
@@ -21,7 +21,7 @@
             <!-- Section one -->
             <div class="section-one mx-auto d-flex justify-content-center align-items-center">
                 <div class="container d-flex flex-column align-items-center">
-                    <div class="header d-flex justify-content-center align-items-center text-center position-sticky w-100">
+                    <div class="header d-flex justify-content-center align-items-center position-sticky w-100">
                         <div class="inner-logo d-none align-items-center justify-content-center overflow-hidden">
                             <a href="/">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-threads" viewBox="0 0 16 16">
@@ -29,35 +29,17 @@
                                   </svg>
                             </a>
                         </div>
-                        <div class="for-you">
+                        <div class="button-back d-flex">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </div>
+                        <div class="for-you d-flex align-items-center mx-auto h-100">
                             <a href="/"><span>For you</span></a>
                         </div>
                         <div class="inner-bars-mobile d-none hover-2 text-center position-absolute d-flex justify-content-center align-items-center" onclick="showInnerBars()">
                             <i class="fa-solid fa-bars-staggered"></i>
                         </div>
                     </div>
-                    <div class ="filter d-none">
-                        <div class="for-you">
-                            <a href="/"><span>For you</span></a>
-                        </div>
-                        <div class="following">
-                            <a href="#"><span>Following</span></a>
-                        </div>
-                    </div>
                     <div class="inner-status">
-                        <div class = "container-create d-flex justify-content-between align-items-center position-relative">
-                            <div class="inner-image position-absolute">
-                                <img src="/assets/image/cat.jpg" alt="avatar" class="w-100">
-                            </div>
-                            <div class="inner-content d-flex align-items-center">
-                                <span>What's new?</span>
-                            </div>
-                            <div class="button-post d-flex justify-content-center align-items-center">
-                                <div class="button-post-content align-items-center">
-                                    Post
-                                </div>
-                            </div>
-                        </div>
                         <div class = "container-post">
                             <div class="post-1">
                                 <div class="inner-content">
@@ -90,6 +72,14 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="container-replies d-flex justify-content-between align-items-center">
+                            <div class="replies">
+                                <span>Replies</span>
+                            </div>
+                            <div class="view-activity">
+                                <span>View activity ></span>
                             </div>
                         </div>
                         <div class="container-post">

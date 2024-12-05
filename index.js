@@ -22,6 +22,7 @@ const signupRouter = require('./routes/signup');
 const activityRouter = require('./routes/activity');
 const forgotRouter = require('./routes/forgot');
 const followRouter = require('./routes/follow');
+const detailsRouter = require('./routes/details')
 
 
 app.set("view engine", "hbs");
@@ -41,6 +42,7 @@ app.use('/signup', signupRouter);
 app.use('/activity', activityRouter);
 app.use('/forgot', forgotRouter);
 app.use('/follow', followRouter);
+app.use('/details', detailsRouter);
 
 // Lắng nghe trên cổng 3000
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
