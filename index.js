@@ -1,19 +1,6 @@
 const express = require('express');
 const expressHbs = require('express-handlebars');
 const app = express();
-const PORT = 3000;
-
-app.use(express.static(__dirname + "/", ))
-
-app.engine(
-  "hbs",
-  expressHbs.engine({
-    layoutsDir: __dirname + "/views/layouts",
-    partialsDir: __dirname + "/views/partials",
-    extname: "hbs",
-    defaultLayout: null,
-  })
-);
 const homeRouter = require('./routes/home');
 const loginRouter = require('./routes/login');
 const searchRouter = require('./routes/search');
@@ -23,6 +10,21 @@ const activityRouter = require('./routes/activity');
 const forgotRouter = require('./routes/forgot');
 const followRouter = require('./routes/follow');
 const detailsRouter = require('./routes/details')
+const PORT = 3000;
+
+app.use(express.static(__dirname + "/", ))
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.engine(
+  "hbs",
+  expressHbs.engine({
+    layoutsDir: __dirname + "/views/layouts",
+    partialsDir: __dirname + "/views/partials",
+    extname: "hbs",
+    defaultLayout: null,
+  })
+);
+
 
 
 app.set("view engine", "hbs");
