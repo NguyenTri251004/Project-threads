@@ -29,15 +29,8 @@ app.engine(
 
 app.set("view engine", "hbs");
 
-app.get('/', (req, res) => {
-  res.render('home'); 
-});
-
-app.get('/login', (req, res) => {
-  res.render('index'); 
-});
-app.use('/', homeRouter);
-app.use('/login', loginRouter);
+app.use('/', loginRouter);
+app.use('/home', homeRouter);
 app.use('/search', searchRouter);
 app.use('/profile', profileRouter);
 app.use('/signup', signupRouter);

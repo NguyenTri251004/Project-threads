@@ -21,7 +21,7 @@ controller.loginUsers = async (req, res) => {
         if (!isPasswordValid) {
             return res.render("index", { errorMessage: "Sai mật khẩu" });
         }
-        res.redirect("/");  
+        res.redirect("/home");  
 
     } catch (error) {
         console.error("Lỗi khi đăng nhập: ", error);
