@@ -19,26 +19,28 @@
                 />
             </div>
             <div class="sign-up">
-                <form action="" method="post">
+                <form action="/signup" method="POST" id="signUpForm">
                     <span class="sign-up-head">
                         Đăng kí tài khoản 
                     </span>
 
-                    <input type="text" placeholder="Tên người dùng" class="sign-up-user">
+                    <input type="text" placeholder="Tên người dùng" name="username" class="sign-up-user" required>
                     
-                    <input type="email" placeholder="Email" class="email-user">
+                    <input type="email" placeholder="Email" name="email" class="email-user" required>
                     
-                    <input type="password" placeholder="Mật khẩu" class="sign-up-password">
+                    <input type="password" placeholder="Mật khẩu" name="password" class="sign-up-password" required>
 
-                    <input type="password" placeholder="Xác nhận mật khẩu" class="confirm-sign-up-password">
+                    <input type="password" placeholder="Xác nhận mật khẩu" class="confirm-sign-up-password" required>
     
+                    <p id="error-message" style="color: red; display: none;"></p>
+
                     <div class="submit" role="button">
-                            Đăng kí
+                        <button type="submit">Đăng ký</button>
                     </div>
                     <a href="/login" target="_self" class="already">Bạn đã có tài khoản?</a>
                 </form>
             </div>
         </div>
+        <script src="/assets/js/signup.js"></script>
     </body>
-
 </html>
