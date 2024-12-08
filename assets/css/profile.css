@@ -59,6 +59,13 @@ div {
 
 .inner-profile-follower, .modify-profile {
     margin: 0 24px;
+    background-color: inherit;
+    
+}
+
+.inner-profile-follower {
+    outline: none; 
+    border: none;  
 }
 
 .inner-profile-head {
@@ -251,6 +258,107 @@ div {
 
 .inner-love, .inner-comment, .inner-repost, .inner-direct {
     padding: 0 1rem;
+}
+
+
+
+.popup-follow-container {
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 550px;
+    max-height: 80%;
+    background-color: rgba(24,24,24); 
+    border: 2px black solid;
+    border-radius: 20px;
+    overflow-y: auto;
+    overflow: hidden;
+}
+
+.popup-follow-header {
+    position: sticky; 
+    top: 0; 
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-items: center;
+    width: 100%;
+}
+
+.popup-follow-body {
+    flex: 1; 
+    overflow-y: auto;
+    padding: 0;
+    margin: 0;
+}
+
+.follower, .following {
+    width: 50%;
+    justify-items: center;
+    border-bottom: 1px rgb(51,51,51) solid;
+}
+
+.follower h6, .following h6 {
+    margin-top: 10px;
+    margin-bottom: unset ;
+    color: rgb(119,119,119);
+}
+
+.follower p, .following p {
+    margin-top: unset ;
+    color: rgb(119,119,119);
+}
+
+.follow-item {
+    border-bottom: 1px solid #333;
+    display: flex;
+    padding: 15px;
+}
+
+.follow-item:last-child {
+    border-bottom: none;
+}
+
+.follower-name {
+    margin-left: 10px;
+}
+
+.username {
+    color: white;
+    font-weight: bold;
+}
+
+.subname {
+    color: rgb(119,119,119);
+}
+
+.follow-button {
+
+    padding: 10px;
+    border: 1px rgb(51,51,51) solid;
+    border-radius: 10px;
+    margin-left: 50%;
+    color: rgb(119,119,119);
+    font-weight: bold;
+}
+
+.follower-profile-pic {
+    width: 40px;
+    height: 40px;
+}
+
+.follower-profile-pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.bio {
+    margin: 5px 24px;
 }
 
 @media (max-width: 700px) {
