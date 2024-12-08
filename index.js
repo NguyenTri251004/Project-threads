@@ -1,6 +1,7 @@
 const express = require('express');
 const expressHbs = require('express-handlebars');
 const app = express();
+const cookieParser = require('cookie-parser');
 const homeRouter = require('./routes/home');
 const loginRouter = require('./routes/login');
 const searchRouter = require('./routes/search');
@@ -15,6 +16,8 @@ const PORT = 3000;
 app.use(express.static(__dirname + "/", ))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(cookieParser());
 app.engine(
   "hbs",
   expressHbs.engine({
@@ -22,6 +25,9 @@ app.engine(
     partialsDir: __dirname + "/views/partials",
     extname: "hbs",
     defaultLayout: null,
+    runtimeOptions: {
+      allowProtoPropertiesByDefault: true,
+    }
   })
 );
 

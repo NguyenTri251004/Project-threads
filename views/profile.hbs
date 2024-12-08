@@ -28,14 +28,14 @@
                         <div class="inner-profile">
                             <div class="inner-profile-head">
                                 <div class="name">
-                                Duke
+                                {{user.username}}
                                 </div>
                                 <div class="profile-pic">
-                                <img height="100%" width="100%" alt="" src="/assets/image/cat.jpg">  
+                                <img height="100%" width="100%" alt="" src="{{user.profile_picture}}">  
                                 </div>
                             </div>
                             <div class="bio">
-                                bibobibobibo
+                                {{user.bio}}
                             </div>
                             <button id="open-popup-btn" class="inner-profile-follower" onclick="openFollowPopup()">3 người theo dõi</button>
                             <div class="modify-profile" role="button">
@@ -46,7 +46,7 @@
                             </div>
                             <div class="create-thread">
                                 <a class="create-thread-logo" href="#">
-                                    <img height="100%" width="100%" alt="" src="/assets/image/cat.jpg">  
+                                    <img height="100%" width="100%" alt="" src="{{user.profile_picture}}">  
                                 </a>
                                 <div class="create-thread-middle">
                                     Có gì mới?
@@ -59,10 +59,10 @@
                                 <div class="post-1">
                                     <div class="inner-content">
                                         <div class="inner-image">
-                                            <img height="100%" width="100%" src="/assets/image/cat.jpg" alt="image">
+                                            <img height="100%" width="100%" src="{{user.profile_picture}}" alt="image">
                                         </div>
                                         <div class="inner-name">
-                                            <span class="user-name">Duke</span>
+                                            <span class="user-name">{{user.username}}</span>
                                             <span class="time">10h</span>
                                         </div>
                                         <div class="inner-tus">

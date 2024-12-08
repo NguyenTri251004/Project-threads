@@ -21,6 +21,7 @@ controller.loginUsers = async (req, res) => {
         if (!isPasswordValid) {
             return res.render("index", { errorMessage: "Sai mật khẩu" });
         }
+        res.cookie('userId', user.id, { maxAge: 3600000, httpOnly: true });
         res.redirect("/home");  
 
     } catch (error) {
