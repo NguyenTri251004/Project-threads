@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // Define associations here
-      User.hasMany(models.Thread, { foreignKey: "user_id" }); 
-      User.hasMany(models.Comment, { foreignKey: "user_id" }); 
+      User.hasMany(models.Thread, { foreignKey: "user_id", as: 'users-threads' }); 
+      User.hasMany(models.Comment, { foreignKey: "user_id", as: 'users-comments' }); 
     }
   }
   User.init(

@@ -61,6 +61,7 @@ body {
     align-items: center;
     line-height: 50px;
     color: rgb(158,158,164);
+    font-weight: 500;
 }
 
 .forgot-password, .or, .sign-up{

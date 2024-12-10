@@ -47,26 +47,28 @@
                             <span class="fs-6 fw-medium">Follow suggestions</span>
                         </div>
                         <div class="user-list">
+                            {{#each userList}}
                             <div class="container-post w-100 d-flex">
                                 <div class="inner-image">
-                                    <img src="/assets/image/kewtiie.jpg" class="w-100 h-auto rounded-circle object-fit-cover" alt="image">
+                                    <img src="{{this.ava}}" class="w-100 h-auto rounded-circle object-fit-cover" alt="image">
                                 </div>
                                 <div class="inner-content w-100">
                                     <div class="inner-wrap d-flex justify-content-between">
                                         <div class="inner-name d-flex flex-column">
-                                            <span class="user-name fs-6 fw-medium mb-1">kewtiie</span>
-                                            <span class="sub-name fs-6">K</span>
+                                            <span class="user-name fs-6 fw-medium mb-1">{{this.name}}</span>
+                                            <span class="sub-name fs-6">{{this.subname}}</span>
                                         </div>
-                                        <div class="inner-follow d-flex justify-content-center align-items-center">
-                                            <span class ="d-flex align-items-center justify-content-center fw-medium">Follow</span>
+                                        <div class="inner-follow d-flex justify-content-center align-items-center" data-id="{{this.id}}">
+                                            <span class ="d-flex align-items-center justify-content-center fw-medium">{{#if this.isFollowing}}Following{{else}}Follow{{/if}}</span>
                                         </div>
                                     </div>
-                                    <div class="inner-fler mt-3">
+                                    {{!-- <div class="inner-fler mt-3">
                                         <span>251K followers</span>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
-                            <div class="container-post w-100 d-flex">
+                            {{/each}}
+                            {{!-- <div class="container-post w-100 d-flex">
                                 <div class="inner-image">
                                     <img src="/assets/image/salimhwg.jpg" class="w-100 h-auto rounded-circle object-fit-cover" alt="image">
                                 </div>
@@ -198,7 +200,7 @@
                                         <span>460K followers</span>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -211,6 +213,6 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="/assets/js/search.js"></script>
+    <script src="/assets/js/search.js"></script>    
 </body>
 </html>
