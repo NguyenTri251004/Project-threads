@@ -7,5 +7,6 @@ router.get('/', (req, res) => {
   res.render('signup');
 });
 router.post("/", controller.signUpUsers);
+router.get('/verified', controller.verifyUser);
 
 module.exports = router;

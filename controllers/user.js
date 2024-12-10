@@ -1,13 +1,15 @@
 const controller = {};
 const bcrypt = require('bcrypt');
 const models = require("../models");
+const nodemailer = require('nodemailer');
+
 //dang nhap
 controller.loginUsers = async (req, res) => {
     try {
-        //mk mac dinh trong db: password1 -> password6 da ma hoa 
         const { email, password } = req.body;
         const cleanEmail = email.trim();
         const cleanPassword = password.trim();
+
         if (!cleanEmail || !cleanPassword) {
             return res.render("index", { errorMessage: "Vui lòng điền đầy đủ thông tin" });
         }
@@ -17,19 +19,45 @@ controller.loginUsers = async (req, res) => {
         if (!user) {
             return res.render("index", { errorMessage: "Tài khoản không tồn tại" });
         }
+
+        if (!user.is_verified) {
+            // Gửi lại email xác minh
+            const verificationLink = `http://localhost:3000/signup/verified?email=${encodeURIComponent(cleanEmail)}`;
+            const transporter = nodemailer.createTransport({
+                service: 'Gmail',
+                auth: {
+                    user: 'vohoangduc3012@gmail.com',
+                    pass: 'nwyf sgww jjpn ewcd',
+                },
+            });
+
+            const mailOptions = {
+                from: 'vohoangduc3012@gmail.com',
+                to: cleanEmail,
+                subject: 'Xác minh tài khoản của bạn',
+                text: `Xin chào ${user.username},\n\nTài khoản của bạn chưa được xác minh. Vui lòng nhấp vào liên kết sau để xác minh:\n\n${verificationLink}\n\nTrân trọng,\nĐội ngũ hỗ trợ.`,
+            };
+
+            await transporter.sendMail(mailOptions);
+
+            return res.render("index", { errorMessage: "Tài khoản chưa xác minh! Email xác minh đã được gửi lại." });
+        }
+
         const isPasswordValid = await bcrypt.compare(cleanPassword, user.password);
+
         if (!isPasswordValid) {
             return res.render("index", { errorMessage: "Sai mật khẩu" });
         }
-        //Dang sua de demo
+
         res.cookie('userId', user.id, { maxAge: 3600000, httpOnly: false });
-        res.redirect("/home");  
+        res.redirect("/home");
 
     } catch (error) {
         console.error("Lỗi khi đăng nhập: ", error);
         res.render("index", { errorMessage: "Đã xảy ra lỗi, vui lòng thử lại sau" });
     }
 };
+
 //dang ky
 controller.signUpUsers = async (req, res) => {
     try {
@@ -60,16 +88,65 @@ controller.signUpUsers = async (req, res) => {
             email: cleanEmail,
             subname: username,
             password: hashedPassword,
+            is_verified: false, // Tài khoản chưa xác minh
         });
 
         await newUser.save();
 
-        res.status(201).json({ success: true, message: 'Đăng ký thành công!' });
+        // Gửi email xác minh
+        const verificationLink = `http://localhost:3000/signup/verified?email=${encodeURIComponent(cleanEmail)}`;
+        const transporter = nodemailer.createTransport({
+            service: 'Gmail',
+            auth: {
+                user: 'vohoangduc3012@gmail.com',
+                pass: 'nwyf sgww jjpn ewcd',
+            },
+        });
+
+        const mailOptions = {
+            from: 'vohoangduc3012@gmail.com',
+            to: cleanEmail,
+            subject: 'Xác minh tài khoản của bạn',
+            text: `Xin chào ${username},\n\nVui lòng nhấp vào liên kết sau để xác minh tài khoản của bạn:\n\n${verificationLink}\n\nTrân trọng,\nĐội ngũ hỗ trợ.`,
+        };
+
+        await transporter.sendMail(mailOptions);
+
+        res.status(201).json({ success: true, message: 'Đăng ký thành công! Vui lòng kiểm tra email để xác minh tài khoản.' });
     } catch (error) {
         console.error('Có lỗi xảy ra khi đăng ký!', error);
         res.status(500).json({ success: false, message: 'Có lỗi xảy ra, vui lòng thử lại sau.' });
     }
 };
+
+controller.verifyUser = async (req, res) => {
+    const { email } = req.query;
+
+    if (!email) {
+        return res.status(400).send('Liên kết không hợp lệ!');
+    }
+
+    try {
+        const user = await models.User.findOne({ where: { email } });
+
+        if (!user) {
+            return res.status(400).send('Tài khoản không tồn tại!');
+        }
+
+        if (user.is_verified) {
+            return res.send('Tài khoản đã được xác minh trước đó.');
+        }
+
+        user.is_verified = true;
+        await user.save();
+
+        res.send('Xác minh thành công! Bạn có thể đăng nhập ngay bây giờ.');
+    } catch (error) {
+        console.error('Lỗi khi xác minh tài khoản:', error);
+        res.status(500).send('Có lỗi xảy ra, vui lòng thử lại sau.');
+    }
+};
+
 //load search  
 controller.loadSearch = async (req, res) => {
     try {

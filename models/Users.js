@@ -48,6 +48,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(2083),
         allowNull: true,
       },
+      is_verified: { // Thêm trường này
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
       created_at: {
         type: DataTypes.DATE,
         allowNull: false,
@@ -64,8 +69,9 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "User",
       tableName: "users",
       schema: "public",
-      timestamps: false, 
+      timestamps: false,
     }
   );
+  
   return User;
 };
