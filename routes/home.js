@@ -2,12 +2,9 @@ const express = require('express');
 const router = express.Router();
 const controller = require("../controllers/user");
 
-// Route cho "/"
-// router.get('/', (req, res) => {
-//   res.render('home');
-// });
-
+//route cho home
 router.get('/', controller.loadHome);
-
+//route cho home following
+router.get('/following' , controller.loadHomeFollowing);
 
 module.exports = router;

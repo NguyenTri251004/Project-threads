@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // Define associations here
       Thread.belongsTo(models.User, { foreignKey: "user_id", onDelete: "CASCADE", as: 'users-threads'});
+      //define them 1 so khoa ngoai
       Thread.hasMany(models.Like, { foreignKey: 'thread_id', as: 'likes-threads', });
       Thread.hasMany(models.Comment, { foreignKey: 'thread_id', as: 'comments-threads', });
     }

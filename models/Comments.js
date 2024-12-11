@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Comment.belongsTo(models.User, { foreignKey: "user_id", onDelete: "SET NULL" });
+      //define them khoa ngoai
       Comment.belongsTo(models.Thread, { foreignKey: "thread_id", onDelete: "CASCADE", as: "comments-threads" });
 
     }

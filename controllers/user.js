@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const models = require("../models");
 const nodemailer = require('nodemailer');
 const { Op } = require("sequelize");
-
+//tinh thoi gian 
 function timeAgo(date) {
     const seconds = Math.floor((new Date() - new Date(date)) / 1000);
     const intervals = [
@@ -227,7 +227,7 @@ controller.unFollowUser = async (req, res) => {
         res.status(500).send('Có lỗi xảy ra khi hủy follow!');
     }
 }
-
+//load Home
 controller.loadHome = async (req , res) => {
     try {
         const userId = req.cookies.userId;
@@ -283,7 +283,81 @@ controller.loadHome = async (req , res) => {
             totalLikes: thread.dataValues.totalLikes,
             totalComments: thread.dataValues.totalComments,
         }));
-        console.log(formattedThreads);
+        res.render('home', { formattedThreads, inforUserId });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Lỗi server" });
+    }
+}
+//load Home Follwing
+controller.loadHomeFollowing = async (req, res) => {
+    try {
+        const userId = req.cookies.userId;
+        if (!userId) {
+            return res.status(400).json({ message: "Bạn cần đăng nhập" });
+        }
+
+        const inforUserId = await models.User.findOne({
+            where: {
+                id : userId,
+            }
+        })
+
+        const following = await models.Follow.findAll({
+            where: { follower_id: userId },
+            attributes: ['followed_id']
+        });
+
+        const followingUserIds = following.map(follow => follow.followed_id);
+
+        if (followingUserIds.length === 0) {
+            return res.render('home', { formattedThreads: [], inforUserId});
+        }
+
+        const threads = await models.Thread.findAll({
+            where: {
+                user_id: { [Op.in]: followingUserIds }
+            },
+            attributes: [
+                'id', 
+                'content', 
+                'image_url' , 
+                'created_at',
+                [models.Sequelize.fn('COUNT', models.Sequelize.col('likes-threads.id')), 'totalLikes'],
+                [models.Sequelize.fn('COUNT', models.Sequelize.col('comments-threads.thread_id')), 'totalComments'],
+            ],
+            include : [
+                {
+                    model: models.User,
+                    as: 'users-threads', 
+                    attributes: ['id', 'username', 'profile_picture'], 
+                },
+                {
+                    model: models.Like,
+                    as: 'likes-threads', 
+                    attributes: [],
+                },
+                {
+                    model: models.Comment,
+                    as: 'comments-threads', 
+                    attributes: [],
+                }
+            ],
+            group: ['Thread.id', 'users-threads.id'],
+            order: [['created_at', 'DESC']]
+        })
+        
+        const formattedThreads = threads.map(thread => ({
+            threadId: thread.id,
+            userId: thread['users-threads'].id,
+            username: thread['users-threads'].username,
+            ava: thread['users-threads'].profile_picture,
+            content: thread.content,
+            img: thread.image_url,
+            postedAgo: timeAgo(thread.created_at),
+            totalLikes: thread.dataValues.totalLikes,
+            totalComments: thread.dataValues.totalComments,
+        }));
         res.render('home', { formattedThreads, inforUserId });
     } catch (error) {
         console.error(error);
