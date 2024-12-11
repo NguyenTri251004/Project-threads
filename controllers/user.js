@@ -131,4 +131,7 @@ controller.unFollowUser = async (req, res) => {
     }
 }
 
+controller.loadHome = async (req , res) => {
+    
+}
 module.exports = controller;

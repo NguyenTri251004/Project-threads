@@ -7,6 +7,7 @@ router.get('/', (req, res) => {
   res.render('home');
 });
 
+router.get('/', controller.loadHome);
 // router.get('/following', controller.loadFollowingThreads )
 
 module.exports = router;
