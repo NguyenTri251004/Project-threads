@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // Define associations here
       Thread.belongsTo(models.User, { foreignKey: "user_id", onDelete: "CASCADE", as: 'users-threads'});
-      // Nếu cần thiết, thêm các mối quan hệ khác với các bảng khác như 'comments' hoặc 'likes' ở đây
+      Thread.hasMany(models.Like, { foreignKey: 'thread_id', as: 'likes-threads', });
+      Thread.hasMany(models.Comment, { foreignKey: 'thread_id', as: 'comments-threads', });
     }
   }
 

@@ -9,8 +9,9 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Comment.belongsTo(models.Thread, { foreignKey: "thread_id", onDelete: "CASCADE" });
       Comment.belongsTo(models.User, { foreignKey: "user_id", onDelete: "SET NULL" });
+      Comment.belongsTo(models.Thread, { foreignKey: "thread_id", onDelete: "CASCADE", as: "comments-threads" });
+
     }
   }
 

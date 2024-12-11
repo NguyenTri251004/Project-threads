@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // Define associations here
-      Like.belongsTo(models.Thread, { foreignKey: "thread_id", onDelete: "CASCADE" });
+      Like.belongsTo(models.Thread, { foreignKey: "thread_id", onDelete: "CASCADE", as: 'likes-threads' });
       Like.belongsTo(models.User, { foreignKey: "user_id", onDelete: "CASCADE" });
     }
   }

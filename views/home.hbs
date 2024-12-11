@@ -19,8 +19,8 @@
             <!-- End Taskbar -->
 
             <!-- Section one -->
-            <div class="section-one mx-auto d-flex justify-content-center align-items-center">
-                <div class="container d-flex flex-column align-items-center">
+            <div class="section-one mx-auto d-flex justify-content-center">
+                <div class="container d-flex flex-column">
                     <div class="header d-flex justify-content-center align-items-center text-center position-sticky w-100">
                         <div class="inner-logo d-none align-items-center justify-content-center overflow-hidden">
                             <a href="/home">
@@ -45,9 +45,10 @@
                         </div>
                     </div>
                     <div class="inner-status">
+                        {{#with inforUserId}}
                         <div class = "container-create d-flex justify-content-between align-items-center position-relative">
                             <div class="inner-image position-absolute">
-                                <img src="/assets/image/cat.jpg" alt="avatar" class="w-100">
+                                <img src="{{this.profile_picture}}" alt="avatar" class="w-100">
                             </div>
                             <div class="inner-content d-flex align-items-center">
                                 <span>What's new?</span>
@@ -58,27 +59,29 @@
                                 </div>
                             </div>
                         </div>
+                        {{/with}}
+                        {{#each formattedThreads}}
                         <div class = "container-post">
                             <div class="post-1">
                                 <div class="inner-content">
                                     <div class="inner-image">
-                                        <img src="./assets/image/pic1.jpg" alt="image">
+                                        <img src="{{this.ava}}" alt="avatar">
                                     </div>
                                     <div class="inner-name">
-                                        <span class="user-name">sirens.sea</span>
-                                        <span class="time">17h</span>
+                                        <span class="user-name">{{this.username}}</span>
+                                        <span class="time">{{this.postedAgo}}</span>
                                     </div>
                                     <div class="inner-tus">
-                                        <span>I'm genuinely going to try and be less of a bah humbug this year ✨✨👀 But I also won't be reposting anything even remotely Christmasy anytime soon... It's too early for me and makes me sad 🫶🏻</span>
+                                        <span>{{this.content}}</span>
                                     </div>
                                     <div class="inner-reaction">
                                         <div class="inner-love">
                                             <i class="fa-regular fa-heart"></i>
-                                            <span>16</span>
+                                            <span>{{this.totalLikes}}</span>
                                         </div>
                                         <div class="inner-comment">
                                             <i class="fa-regular fa-comment"></i>
-                                            <span>3</span>
+                                            <span>{{this.totalComments}}</span>
                                         </div>
                                         <div class="inner-repost">
                                             <i class="fa-solid fa-repeat"></i>
@@ -92,7 +95,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="container-post">
+                        {{/each}}
+                        {{!-- <div class="container-post">
                             <div class="post-2">
                                 <div class="inner-content">
                                     <div class="inner-image">
@@ -201,7 +205,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
