@@ -30,12 +30,13 @@ if (!menu.contains(event.target) && !trigger.contains(event.target)) {
 document.addEventListener("DOMContentLoaded", function () {
     const currentUrl = window.location.pathname;
 
-    const menuItems = document.querySelectorAll(" .inner-home, .inner-sreach, .inner-love, .inner-people");
+    const menuItems = document.querySelectorAll(".inner-home, .inner-sreach, .inner-love, .inner-people");
 
     menuItems.forEach(function (item) {
         const link = item.querySelector("a"); 
         const icon = item.querySelector("i");  
-        if (link && link.getAttribute("href") === currentUrl && !item.classList.contains('inner-plus')) {
+        
+        if (link && (link.getAttribute("href") === currentUrl || currentUrl === '/home/following' && item.classList.contains('inner-home'))) {
             icon.classList.add("text-white");
         } else {
             icon.classList.remove("text-white");

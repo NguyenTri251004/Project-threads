@@ -9,7 +9,6 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // Define associations here
       User.hasMany(models.Thread, { foreignKey: "user_id", as: 'users-threads' }); 
       User.hasMany(models.Comment, { foreignKey: "user_id", as: 'users-comments' }); 
     }

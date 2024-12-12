@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const controller = require("../controllers/loadpage");
 
-// Route cho "/"
-router.get('/', (req, res) => {
-  res.render('details');
-});
+// Route cho "/details_id"
+router.get('/:id_thread', controller.loadThreadDetails);
 
 module.exports = router;

@@ -2,26 +2,7 @@ const controller = {};
 const bcrypt = require('bcrypt');
 const models = require("../models");
 const nodemailer = require('nodemailer');
-const { Op } = require("sequelize");
-//tinh thoi gian 
-function timeAgo(date) {
-    const seconds = Math.floor((new Date() - new Date(date)) / 1000);
-    const intervals = [
-        { label: 'năm', seconds: 31536000 },
-        { label: 'tháng', seconds: 2592000 },
-        { label: 'ngày', seconds: 86400 },
-        { label: 'giờ', seconds: 3600 },
-        { label: 'phút', seconds: 60 },
-    ];
 
-    for (const interval of intervals) {
-        const count = Math.floor(seconds / interval.seconds);
-        if (count > 0) {
-            return `${count} ${interval.label}`;
-        }
-    }
-    return 'vừa xong';
-}
 
 //dang nhap
 controller.loginUsers = async (req, res) => {
@@ -138,7 +119,7 @@ controller.signUpUsers = async (req, res) => {
         res.status(500).json({ success: false, message: 'Có lỗi xảy ra, vui lòng thử lại sau.' });
     }
 };
-
+//xac thuc tai khoan
 controller.verifyUser = async (req, res) => {
     const { email } = req.query;
 
@@ -167,36 +148,6 @@ controller.verifyUser = async (req, res) => {
     }
 };
 
-//load search  
-controller.loadSearch = async (req, res) => {
-    try {
-        const userId = req.cookies.userId;
-        if (!userId) {
-            return res.status(400).json({ message: "Bạn cần đăng nhập" });
-        }
-
-        const users = await models.User.findAll({
-            where: { id: { [models.Sequelize.Op.ne]: userId } }
-        });
-
-        const following = await models.Follow.findAll({
-            where: { follower_id: userId },
-            attributes: ['followed_id']
-        });
-        const followingIds = following.map(f => f.followed_id);
-        const userList = users.map(user => ({
-            id: user.id,
-            name: user.username,
-            subname: user.subname,
-            ava: user.profile_picture || '/assets/image/pic1.jpg', 
-            isFollowing: followingIds.includes(user.id) 
-        }));
-        res.render('search', { userList });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Lỗi hệ thống! " });
-    }
-}
 //follow user
 controller.followUser = async (req, res) => {
     const { followerId, followedId } = req.body;
@@ -227,141 +178,5 @@ controller.unFollowUser = async (req, res) => {
         res.status(500).send('Có lỗi xảy ra khi hủy follow!');
     }
 }
-//load Home
-controller.loadHome = async (req , res) => {
-    try {
-        const userId = req.cookies.userId;
-        if (!userId) {
-            return res.status(400).json({ message: "Bạn cần đăng nhập" });
-        }
 
-        const threads = await models.Thread.findAll({
-            where: {
-                user_id: { [Op.ne]: userId }
-            },
-            attributes: [
-                'id', 
-                'content', 
-                'image_url' , 
-                'created_at',
-                [models.Sequelize.fn('COUNT', models.Sequelize.col('likes-threads.id')), 'totalLikes'],
-                [models.Sequelize.fn('COUNT', models.Sequelize.col('comments-threads.thread_id')), 'totalComments'],
-            ],
-            include : [
-                {
-                    model: models.User,
-                    as: 'users-threads', 
-                    attributes: ['id', 'username', 'profile_picture'], 
-                },
-                {
-                    model: models.Like,
-                    as: 'likes-threads', 
-                    attributes: [],
-                },
-                {
-                    model: models.Comment,
-                    as: 'comments-threads', 
-                    attributes: [],
-                }
-            ],
-            group: ['Thread.id', 'users-threads.id'],
-            order: [['created_at', 'DESC']]
-        })
-        const inforUserId = await models.User.findOne({
-            where: {
-                id : userId,
-            }
-        })
-        const formattedThreads = threads.map(thread => ({
-            threadId: thread.id,
-            userId: thread['users-threads'].id,
-            username: thread['users-threads'].username,
-            ava: thread['users-threads'].profile_picture,
-            content: thread.content,
-            img: thread.image_url,
-            postedAgo: timeAgo(thread.created_at),
-            totalLikes: thread.dataValues.totalLikes,
-            totalComments: thread.dataValues.totalComments,
-        }));
-        res.render('home', { formattedThreads, inforUserId });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Lỗi server" });
-    }
-}
-//load Home Follwing
-controller.loadHomeFollowing = async (req, res) => {
-    try {
-        const userId = req.cookies.userId;
-        if (!userId) {
-            return res.status(400).json({ message: "Bạn cần đăng nhập" });
-        }
-
-        const inforUserId = await models.User.findOne({
-            where: {
-                id : userId,
-            }
-        })
-
-        const following = await models.Follow.findAll({
-            where: { follower_id: userId },
-            attributes: ['followed_id']
-        });
-
-        const followingUserIds = following.map(follow => follow.followed_id);
-
-        if (followingUserIds.length === 0) {
-            return res.render('home', { formattedThreads: [], inforUserId});
-        }
-
-        const threads = await models.Thread.findAll({
-            where: {
-                user_id: { [Op.in]: followingUserIds }
-            },
-            attributes: [
-                'id', 
-                'content', 
-                'image_url' , 
-                'created_at',
-                [models.Sequelize.fn('COUNT', models.Sequelize.col('likes-threads.id')), 'totalLikes'],
-                [models.Sequelize.fn('COUNT', models.Sequelize.col('comments-threads.thread_id')), 'totalComments'],
-            ],
-            include : [
-                {
-                    model: models.User,
-                    as: 'users-threads', 
-                    attributes: ['id', 'username', 'profile_picture'], 
-                },
-                {
-                    model: models.Like,
-                    as: 'likes-threads', 
-                    attributes: [],
-                },
-                {
-                    model: models.Comment,
-                    as: 'comments-threads', 
-                    attributes: [],
-                }
-            ],
-            group: ['Thread.id', 'users-threads.id'],
-            order: [['created_at', 'DESC']]
-        })
-        
-        const formattedThreads = threads.map(thread => ({
-            threadId: thread.id,
-            userId: thread['users-threads'].id,
-            username: thread['users-threads'].username,
-            ava: thread['users-threads'].profile_picture,
-            content: thread.content,
-            img: thread.image_url,
-            postedAgo: timeAgo(thread.created_at),
-            totalLikes: thread.dataValues.totalLikes,
-            totalComments: thread.dataValues.totalComments,
-        }));
-        res.render('home', { formattedThreads, inforUserId });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Lỗi server" });
-    }
-}
 module.exports = controller;

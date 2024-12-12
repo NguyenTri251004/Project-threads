@@ -13,6 +13,25 @@ const followRouter = require('./routes/follow');
 const detailsRouter = require('./routes/details')
 const PORT = 3000;
 
+function timeAgo(date) {
+    const seconds = Math.floor((new Date() - new Date(date)) / 1000);
+    const intervals = [
+        { label: 'năm', seconds: 31536000 },
+        { label: 'tháng', seconds: 2592000 },
+        { label: 'ngày', seconds: 86400 },
+        { label: 'giờ', seconds: 3600 },
+        { label: 'phút', seconds: 60 },
+    ];
+
+    for (const interval of intervals) {
+        const count = Math.floor(seconds / interval.seconds);
+        if (count > 0) {
+            return `${count} ${interval.label}`;
+        }
+    }
+    return 'vừa xong';
+}
+
 app.use(express.static(__dirname + "/", ))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -27,6 +46,10 @@ app.engine(
     defaultLayout: null,
     runtimeOptions: {
       allowProtoPropertiesByDefault: true,
+    },
+    //them helpers cho timeAgo
+    helpers: {
+      timeAgo: (date) => timeAgo(date),
     }
   })
 );

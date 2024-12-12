@@ -19,8 +19,8 @@
             <!-- End Taskbar -->
 
             <!-- Section one -->
-            <div class="section-one mx-auto d-flex justify-content-center align-items-center">
-                <div class="container d-flex flex-column align-items-center">
+            <div class="section-one mx-auto d-flex justify-content-center">
+                <div class="container d-flex flex-column">
                     <div class="header d-flex justify-content-center align-items-center position-sticky w-100">
                         <div class="inner-logo d-none align-items-center justify-content-center overflow-hidden">
                             <a href="/home">
@@ -44,23 +44,23 @@
                             <div class="post-1">
                                 <div class="inner-content">
                                     <div class="inner-image">
-                                        <img src="./assets/image/pic1.jpg" alt="image">
+                                        <img src="{{ava}}" alt="image">
                                     </div>
                                     <div class="inner-name">
-                                        <span class="user-name">sirens.sea</span>
-                                        <span class="time">17h</span>
+                                        <span class="user-name">{{username}}</span>
+                                        <span class="time">{{timeAgo this.created_at }} </span>
                                     </div>
                                     <div class="inner-tus">
-                                        <span>I'm genuinely going to try and be less of a bah humbug this year ✨✨👀 But I also won't be reposting anything even remotely Christmasy anytime soon... It's too early for me and makes me sad 🫶🏻</span>
+                                        <span>{{content}}</span>
                                     </div>
                                     <div class="inner-reaction">
                                         <div class="inner-love">
                                             <i class="fa-regular fa-heart"></i>
-                                            <span>16</span>
+                                            <span>{{totalLikes}}</span>
                                         </div>
                                         <div class="inner-comment">
                                             <i class="fa-regular fa-comment"></i>
-                                            <span>3</span>
+                                            <span>{{totalComments}}</span>
                                         </div>
                                         <div class="inner-repost">
                                             <i class="fa-solid fa-repeat"></i>
@@ -82,45 +82,30 @@
                                 <span>View activity ></span>
                             </div>
                         </div>
+                        {{#if comments.length}}
+                            {{#each comments}}
                         <div class="container-post">
                             <div class="post-2">
                                 <div class="inner-content">
                                     <div class="inner-image">
-                                        <img src="./assets/image/pic2.jpg" alt="image">
+                                        <img src="{{this.users-comments.profile_picture}}" alt="image">
                                     </div>
                                     <div class="inner-name">
-                                        <span class="user-name">jimowczarski</span>
-                                        <span class="time">10h</span>
+                                        <span class="user-name">{{this.users-comments.username}} </span>
+                                        <span class="time">{{timeAgo this.created_at }} </span>
                                     </div>
                                     <div class="inner-tus">
-                                        <span>Milwaukee Bucks try to snap a 4-game losing streak tonight:
-                                            ⛑️injury report
-                                            👥starters
-                                            💰odds
-                                            and more 🧵 below NBAThreads</span>
-                                    </div>
-                                    <div class="inner-reaction">
-                                        <div class="inner-love">
-                                            <i class="fa-regular fa-heart"></i>
-                                            <span>2</span>
-                                        </div>
-                                        <div class="inner-comment">
-                                            <i class="fa-regular fa-comment"></i>
-                                            <span>14</span>
-                                        </div>
-                                        <div class="inner-repost">
-                                            <i class="fa-solid fa-repeat"></i>
-                                            <span>1</span>
-                                        </div>
-                                        <div class="inner-direct">
-                                            <i class="fa-solid fa-location-arrow"></i>
-                                            <span></span>
-                                        </div>
+                                        <span>{{this.content}}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="container-post">
+                        {{/each}}
+                        {{else}}
+                            <p>Chưa có bình luận nào.</p>
+                        {{/if}}
+
+                        {{!-- <div class="container-post">
                             <div class="post-3">
                                 <div class="inner-content">
                                     <div class="inner-image">
@@ -191,7 +176,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
