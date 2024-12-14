@@ -210,4 +210,16 @@ controller.likeThreads = async (req, res) => {
         res.status(500).json({ message: 'Lỗi server' });
     }
 }
+//log out
+controller.logOut = (req, res) => {
+    res.clearCookie("userId"); 
+    res.redirect("/");
+};
+//xac thuc dang nhap
+controller.authenticate = (req, res , next) => {
+    if (!req.cookies.userId) {
+        return res.redirect("/");
+    }
+    next();
+};
 module.exports = controller;

@@ -11,6 +11,7 @@ const activityRouter = require('./routes/activity');
 const forgotRouter = require('./routes/forgot');
 const followRouter = require('./routes/follow');
 const detailsRouter = require('./routes/details')
+const logoutRouter = require('./routes/logout')
 const PORT = 3000;
 
 function timeAgo(date) {
@@ -54,9 +55,12 @@ app.engine(
   })
 );
 
-
-
 app.set("view engine", "hbs");
+
+app.use((req, res, next) => {
+  res.locals.userId = req.cookies.userId;
+  next();
+})
 
 app.use('/', loginRouter);
 app.use('/home', homeRouter);
@@ -67,6 +71,8 @@ app.use('/activity', activityRouter);
 app.use('/forgot', forgotRouter);
 app.use('/follow', followRouter);
 app.use('/details', detailsRouter);
+app.use('/logout', logoutRouter);
+
 
 // Lắng nghe trên cổng 3000
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));

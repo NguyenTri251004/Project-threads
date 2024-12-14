@@ -130,7 +130,9 @@ div.hover-2:hover i {
     padding: 10px;
 }
 
-.inner-bars-show .container-fluid .inner-bars-top div, .inner-bars-show .container-fluid .inner-bars-bottom div {
+.inner-bars-show .container-fluid .inner-bars-top div, .inner-bars-show .container-fluid .inner-bars-bottom .report,
+.inner-bars-show .container-fluid .inner-bars-top div, .inner-bars-show .container-fluid .inner-bars-bottom a
+ {
     flex: 1;
     font-weight: 500;
     padding-left: 10px;
