@@ -6,3 +6,8 @@
 ###### trong file home.hbs, detais.hbs sua 1 so class bootstrap align-items-center
 ######
 
+
+### 14/12/2024
+###### update logout, authenticate (xac thuc dang nhap neu nhu chua dang nhap thi chuyen lai trang login)
+###### update like thread
+###### xoa hashpassword.js
