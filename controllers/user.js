@@ -178,5 +178,36 @@ controller.unFollowUser = async (req, res) => {
         res.status(500).send('Có lỗi xảy ra khi hủy follow!');
     }
 }
+//like thread
+controller.likeThreads = async (req, res) => {
+    const threadId = req.params.id_thread;
+    console.log(threadId);
+    const userId = req.cookies.userId;
+    if (!userId) {
+        return res.status(401).json({ message: 'Bạn cần đăng nhập !' });
+    }
+    try {
+        const existingLike = await models.Like.findOne({
+            where: { thread_id: threadId, user_id: userId },
+        });
 
+        if (existingLike) {
+            await existingLike.destroy();
+
+            const totalLikes = await models.Like.count({ where: { thread_id: threadId } });
+            return res.json({ liked: false, totalLikes });
+        } else {
+            await models.Like.create({
+                thread_id: threadId,
+                user_id: userId,
+            });
+
+            const totalLikes = await models.Like.count({ where: { thread_id: threadId } });
+            return res.json({ liked: true, totalLikes });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Lỗi server' });
+    }
+}
 module.exports = controller;

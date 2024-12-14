@@ -50,7 +50,7 @@ controller.loadHome = async (req , res) => {
                 'image_url' , 
                 'created_at',
                 [models.Sequelize.fn('COUNT', models.Sequelize.col('likes-threads.id')), 'totalLikes'],
-                [models.Sequelize.fn('COUNT', models.Sequelize.col('comments-threads.thread_id')), 'totalComments'],
+                [models.Sequelize.fn('COUNT', models.Sequelize.literal('DISTINCT "comments-threads"."thread_id"')), 'totalComments']
             ],
             include : [
                 {
@@ -77,16 +77,26 @@ controller.loadHome = async (req , res) => {
                 id : userId,
             }
         })
-        const formattedThreads = threads.map(thread => ({
-            threadId: thread.id,
-            userId: thread['users-threads'].id,
-            username: thread['users-threads'].username,
-            ava: thread['users-threads'].profile_picture,
-            content: thread.content,
-            img: thread.image_url,
-            created_at: thread.created_at,
-            totalLikes: thread.dataValues.totalLikes,
-            totalComments: thread.dataValues.totalComments,
+        const formattedThreads = await Promise.all(threads.map(async (thread) => {
+            const isLiked = await models.Like.findOne({
+                where: {
+                    thread_id: thread.id,
+                    user_id: userId,
+                },
+            });
+
+            return {
+                threadId: thread.id,
+                userId: thread['users-threads'].id,
+                username: thread['users-threads'].username,
+                ava: thread['users-threads'].profile_picture,
+                content: thread.content,
+                img: thread.image_url,
+                created_at: thread.created_at,
+                totalLikes: thread.dataValues.totalLikes,
+                totalComments: thread.dataValues.totalComments,
+                isLiked: !!isLiked, 
+            };
         }));
         res.render('home', { formattedThreads, inforUserId });
     } catch (error) {
@@ -104,9 +114,9 @@ controller.loadHomeFollowing = async (req, res) => {
 
         const inforUserId = await models.User.findOne({
             where: {
-                id : userId,
+                id: userId,
             }
-        })
+        });
 
         const following = await models.Follow.findAll({
             where: { follower_id: userId },
@@ -116,7 +126,7 @@ controller.loadHomeFollowing = async (req, res) => {
         const followingUserIds = following.map(follow => follow.followed_id);
 
         if (followingUserIds.length === 0) {
-            return res.render('home', { formattedThreads: [], inforUserId});
+            return res.render('home', { formattedThreads: [], inforUserId });
         }
 
         const threads = await models.Thread.findAll({
@@ -126,16 +136,16 @@ controller.loadHomeFollowing = async (req, res) => {
             attributes: [
                 'id', 
                 'content', 
-                'image_url' , 
+                'image_url', 
                 'created_at',
                 [models.Sequelize.fn('COUNT', models.Sequelize.col('likes-threads.id')), 'totalLikes'],
-                [models.Sequelize.fn('COUNT', models.Sequelize.col('comments-threads.thread_id')), 'totalComments'],
+                [models.Sequelize.fn('COUNT', models.Sequelize.literal('DISTINCT "comments-threads"."thread_id"')), 'totalComments']
             ],
-            include : [
+            include: [
                 {
                     model: models.User,
                     as: 'users-threads', 
-                    attributes: ['id', 'username', 'profile_picture'], 
+                    attributes: ['id', 'username', 'profile_picture'],
                 },
                 {
                     model: models.Like,
@@ -150,28 +160,40 @@ controller.loadHomeFollowing = async (req, res) => {
             ],
             group: ['Thread.id', 'users-threads.id'],
             order: [['created_at', 'DESC']]
-        })
-        
-        const formattedThreads = threads.map(thread => ({
-            threadId: thread.id,
-            userId: thread['users-threads'].id,
-            username: thread['users-threads'].username,
-            ava: thread['users-threads'].profile_picture,
-            content: thread.content,
-            img: thread.image_url,
-            created_at: thread.created_at,
-            totalLikes: thread.dataValues.totalLikes,
-            totalComments: thread.dataValues.totalComments,
+        });
+
+        const formattedThreads = await Promise.all(threads.map(async (thread) => {
+            const isLiked = await models.Like.findOne({
+                where: {
+                    thread_id: thread.id,
+                    user_id: userId,
+                },
+            });
+
+            return {
+                threadId: thread.id,
+                userId: thread['users-threads'].id,
+                username: thread['users-threads'].username,
+                ava: thread['users-threads'].profile_picture,
+                content: thread.content,
+                img: thread.image_url,
+                created_at: thread.created_at,
+                totalLikes: thread.dataValues.totalLikes,
+                totalComments: thread.dataValues.totalComments,
+                isLiked: !!isLiked,  
+            };
         }));
+
         res.render('home', { formattedThreads, inforUserId });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Lỗi server" });
     }
-}
+};
 //load details
 controller.loadThreadDetails = async (req, res) => {
     const threadId = req.params.id_thread;
+    const userId = req.cookies.userId;
     if (!threadId) {
         return res.status(400).render('error', { message: "Thread ID không hợp lệ" });
     }
@@ -184,7 +206,7 @@ controller.loadThreadDetails = async (req, res) => {
                 'image_url' , 
                 'created_at',
                 [models.Sequelize.fn('COUNT', models.Sequelize.col('likes-threads.id')), 'totalLikes'],
-                [models.Sequelize.fn('COUNT', models.Sequelize.col('comments-threads.thread_id')), 'totalComments'],
+                [models.Sequelize.fn('COUNT', models.Sequelize.literal('DISTINCT "comments-threads"."thread_id"')), 'totalComments']
             ],
             include : [
                 {
@@ -220,9 +242,14 @@ controller.loadThreadDetails = async (req, res) => {
                     attributes: ['id', 'username', 'profile_picture'],
                 },
             ],
-            order: [['created_at', 'DESC']], // Sắp xếp theo thời gian
+            order: [['created_at', 'DESC']], 
         });
-
+        const isLiked = await models.Like.findOne({
+            where: {
+                thread_id: threadId,
+                user_id: userId,
+            },
+        });
 
 
         res.render('details', {
@@ -235,6 +262,7 @@ controller.loadThreadDetails = async (req, res) => {
             created_at: threadDetails.created_at,
             totalLikes: threadDetails.dataValues.totalLikes,
             totalComments: threadDetails.dataValues.totalComments,
+            isLiked: !!isLiked,
             comments,
         });
     } catch (error) {
