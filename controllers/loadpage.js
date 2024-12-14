@@ -6,10 +6,6 @@ const { Op } = require("sequelize");
 controller.loadSearch = async (req, res) => {
     try {
         const userId = req.cookies.userId;
-        if (!userId) {
-            return res.status(400).json({ message: "Bạn cần đăng nhập" });
-        }
-
         const users = await models.User.findAll({
             where: { id: { [models.Sequelize.Op.ne]: userId } }
         });
@@ -36,10 +32,6 @@ controller.loadSearch = async (req, res) => {
 controller.loadHome = async (req , res) => {
     try {
         const userId = req.cookies.userId;
-        if (!userId) {
-            return res.status(400).json({ message: "Bạn cần đăng nhập" });
-        }
-
         const threads = await models.Thread.findAll({
             where: {
                 user_id: { [Op.ne]: userId }
@@ -108,10 +100,6 @@ controller.loadHome = async (req , res) => {
 controller.loadHomeFollowing = async (req, res) => {
     try {
         const userId = req.cookies.userId;
-        if (!userId) {
-            return res.status(400).json({ message: "Bạn cần đăng nhập" });
-        }
-
         const inforUserId = await models.User.findOne({
             where: {
                 id: userId,
@@ -195,7 +183,7 @@ controller.loadThreadDetails = async (req, res) => {
     const threadId = req.params.id_thread;
     const userId = req.cookies.userId;
     if (!threadId) {
-        return res.status(400).render('error', { message: "Thread ID không hợp lệ" });
+        return res.status(400).render('error', { message: "Thread không hợp lệ" });
     }
     try {
         const threadDetails = await models.Thread.findOne( {
