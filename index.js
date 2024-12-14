@@ -12,6 +12,7 @@ const forgotRouter = require('./routes/forgot');
 const followRouter = require('./routes/follow');
 const detailsRouter = require('./routes/details')
 const logoutRouter = require('./routes/logout')
+const resetRouter = require('./routes/reset')
 const PORT = 3000;
 
 function timeAgo(date) {
@@ -72,7 +73,7 @@ app.use('/forgot', forgotRouter);
 app.use('/follow', followRouter);
 app.use('/details', detailsRouter);
 app.use('/logout', logoutRouter);
-
+app.use('/reset-password', resetRouter);
 
 // Lắng nghe trên cổng 3000
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));

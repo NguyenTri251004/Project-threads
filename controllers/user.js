@@ -2,8 +2,9 @@ const controller = {};
 const bcrypt = require('bcrypt');
 const models = require("../models");
 const nodemailer = require('nodemailer');
-
-
+const crypto = require('crypto');
+const { Token } = require('../models'); // Model mới bạn đã định nghĩa
+const { Op } = require('sequelize');
 //dang nhap
 controller.loginUsers = async (req, res) => {
     try {
@@ -222,4 +223,102 @@ controller.authenticate = (req, res , next) => {
     }
     next();
 };
+
+controller.sendResetLink = async (req, res) => {
+    const { email } = req.body;
+  
+    try {
+        // Kiểm tra email tồn tại
+        const user = await models.User.findOne({ where: { email } });
+        if (!user) {
+            return res.status(404).json({ success: false, message: "Email không tồn tại." });
+        }
+      
+        // Kiểm tra token tồn tại
+        const existingToken = await models.Token.findOne({ where: { email, token_expiry: { [Op.gt]: new Date() } } });
+        if (existingToken) {
+            return res.status(400).json({ success: false, message: 'Một yêu cầu reset mật khẩu đã được gửi. Vui lòng kiểm tra email.' });
+        }
+
+        // Tạo token ngẫu nhiên
+        const token = crypto.randomBytes(20).toString('hex');
+        const resetLink = `http://localhost:3000/forgot/reset-password/${token}`;
+
+        // Lưu token vào database với thời hạn hiệu lực
+        const tokenExpiry = new Date();
+        tokenExpiry.setHours(tokenExpiry.getHours() + 24);
+
+        await models.Token.create({
+          email,
+          token,
+          token_expiry: tokenExpiry,
+        });
+
+        // Gửi email
+        const transporter = nodemailer.createTransport({
+          service: 'Gmail',
+          auth: {
+            user: 'vohoangduc3012@gmail.com',
+            pass: 'nwyf sgww jjpn ewcd',
+          },
+        });
+      
+        const mailOptions = {
+          from: 'no-reply@voduc.xyz <vohoangduc3012@gmail.com>',
+          to: email,
+          subject: 'Đặt lại mật khẩu',
+          text: `Click vào link để đặt lại mật khẩu: ${resetLink}`,
+        };
+      
+        await transporter.sendMail(mailOptions);
+        res.json({ success: true, message: 'Email đã được gửi!' });
+        return true;
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Không thể gửi email.' });
+        return false;
+      }
+      
+};
+
+controller.checkToken = async (req, res) => {
+    const { token } = req.params;
+
+    // Tìm token trong database
+    const tokenData = await models.Token.findOne({ where: { token } });
+
+    if (!tokenData) {
+    return res.status(400).send("Token không hợp lệ.");
+    }
+
+    // Kiểm tra hạn sử dụng của token
+    const now = new Date();
+    if (now > tokenData.token_expiry) {
+    return res.status(400).send("Token đã hết hạn.");
+    }
+
+    // Hiển thị trang đổi mật khẩu
+    res.render('reset-password', { email: tokenData.email });
+}
+
+
+controller.resetPassword = async (req, res) => {
+    const { email, password, confirmPassword } = req.body;
+  
+    if (password !== confirmPassword) {
+      return res.status(400).send("Mật khẩu không khớp.");
+    }
+  
+    // Hash mật khẩu mới
+    const hashedPassword = await bcrypt.hash(password, 10);
+  
+    // Cập nhật mật khẩu trong database
+    await models.User.update({ password: hashedPassword }, { where: { email } });
+  
+    // Xóa token sau khi sử dụng
+    await models.Token.destroy({ where: { email } });
+  
+    res.send("Mật khẩu đã được thay đổi thành công.");
+}
+
 module.exports = controller;
