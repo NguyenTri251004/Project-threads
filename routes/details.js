@@ -7,4 +7,7 @@ const controller = require("../controllers/user")
 router.get('/:id_thread', controller.authenticate,  controllerLoad.loadThreadDetails);
 
 router.post('/:id_thread/like', controller.likeThreads);
+
+router.post('/comments', controller.commentThreads);
+
 module.exports = router;

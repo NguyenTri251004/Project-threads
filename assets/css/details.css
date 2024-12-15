@@ -73,10 +73,11 @@
     height: 36px;
     top: 0;
     left: 0;
+    overflow: hidden;
 }
 .section-one .container .inner-status  .inner-image img {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
     border-radius: 50%;
 }
@@ -134,6 +135,21 @@
 }
 .section-one .container .inner-status>div {
     border-bottom: 1px solid #2D2D2D;
+}
+.section-one .container .inner-status .container-post .inner-post {
+    width: 104px;
+    height: 34px;
+    border: 1px solid #383939;
+    border-radius: 8px;
+    cursor: pointer;
+    flex-wrap: wrap;
+}
+.section-one .container .inner-status .container-post .inner-tus #comment {
+    flex: 1;
+    color: white;
+    border: none;
+    outline: none;
+    background: #181818;
 }
 @media (max-width: 700px) {
     .section-one {

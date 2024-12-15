@@ -25,7 +25,7 @@ document.getElementById('resetPasswordForm').addEventListener('submit', async (e
         });
 
         const result = await response.json();
-
+        console.log(result);
         // Hiển thị thông báo
         if (result.success) {
             alert('Email đã được gửi!');

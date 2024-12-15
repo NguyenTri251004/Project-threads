@@ -41,8 +41,8 @@ controller.loadHome = async (req , res) => {
                 'content', 
                 'image_url' , 
                 'created_at',
-                [models.Sequelize.fn('COUNT', models.Sequelize.col('likes-threads.id')), 'totalLikes'],
-                [models.Sequelize.fn('COUNT', models.Sequelize.literal('DISTINCT "comments-threads"."thread_id"')), 'totalComments']
+                [models.Sequelize.fn('COUNT', models.Sequelize.literal('DISTINCT "likes-threads"."id"')), 'totalLikes'],
+                [models.Sequelize.fn('COUNT', models.Sequelize.literal('DISTINCT "comments-threads"."id"')), 'totalComments']
             ],
             include : [
                 {
@@ -126,8 +126,8 @@ controller.loadHomeFollowing = async (req, res) => {
                 'content', 
                 'image_url', 
                 'created_at',
-                [models.Sequelize.fn('COUNT', models.Sequelize.col('likes-threads.id')), 'totalLikes'],
-                [models.Sequelize.fn('COUNT', models.Sequelize.literal('DISTINCT "comments-threads"."thread_id"')), 'totalComments']
+                [models.Sequelize.fn('COUNT', models.Sequelize.literal('DISTINCT "likes-threads"."id"')), 'totalLikes'],
+                [models.Sequelize.fn('COUNT', models.Sequelize.literal('DISTINCT "comments-threads"."id"')), 'totalComments']
             ],
             include: [
                 {
@@ -193,8 +193,8 @@ controller.loadThreadDetails = async (req, res) => {
                 'content', 
                 'image_url' , 
                 'created_at',
-                [models.Sequelize.fn('COUNT', models.Sequelize.col('likes-threads.id')), 'totalLikes'],
-                [models.Sequelize.fn('COUNT', models.Sequelize.literal('DISTINCT "comments-threads"."thread_id"')), 'totalComments']
+                [models.Sequelize.fn('COUNT', models.Sequelize.literal('DISTINCT "likes-threads"."id"')), 'totalLikes'],
+                [models.Sequelize.fn('COUNT', models.Sequelize.literal('DISTINCT "comments-threads"."id"')), 'totalComments']
             ],
             include : [
                 {
@@ -238,7 +238,10 @@ controller.loadThreadDetails = async (req, res) => {
                 user_id: userId,
             },
         });
-
+        const currentUser = await models.User.findOne({
+            where: { id: userId },
+            attributes: ['id', 'username', 'profile_picture'],
+        });
 
         res.render('details', {
             threadId: threadDetails.id,
@@ -252,6 +255,7 @@ controller.loadThreadDetails = async (req, res) => {
             totalComments: threadDetails.dataValues.totalComments,
             isLiked: !!isLiked,
             comments,
+            currentUser,
         });
     } catch (error) {
         console.error(error);
