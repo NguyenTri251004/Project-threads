@@ -23,6 +23,7 @@
                 />
             </div>
             <div class="forgot">
+                
                 <form action="/forgot" method="post" id="resetPasswordForm">
                     <span class="forgot-head">
                         Bạn gặp sự cố khi đăng nhập?
@@ -32,6 +33,7 @@
                         Nhập email của bạn và chúng tôi sẽ gửi cho bạn một email để truy cập lại vào tài khoản.
                     </span>                    
                     <input type="email" id="email" name="email" placeholder="Email" class="email-user" required>
+                    <p id="message" style="color: red; display: none;"></p>
                     <button type="submit" class="submit">Gửi liên kết đăng nhập</button>
 
                     <a href="/" target="_self" class="already">Bạn đã có tài khoản?</a>

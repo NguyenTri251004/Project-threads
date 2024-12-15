@@ -25,14 +25,23 @@ document.getElementById('resetPasswordForm').addEventListener('submit', async (e
         });
 
         const result = await response.json();
-        console.log(result);
+
         // Hiển thị thông báo
         if (result.success) {
-            alert('Email đã được gửi!');
+            //alert('Email đã được gửi!');
+            messageDiv.style.display = 'block';
+            messageDiv.style.color = 'green';
+            messageDiv.textContent = result.message;
         } else {
-            alert('Không thể gửi email.');
+            //alert('Không thể gửi email.');
+            messageDiv.style.display = 'block';
+            messageDiv.style.color = 'red';
+            messageDiv.textContent = result.message;
         }
     } catch (error) {
         console.error(error);
+        messageDiv.style.display = 'block';
+        messageDiv.style.color = 'red';
+        messageDiv.textContent = 'Có lỗi xảy ra, vui lòng thử lại.';
     }
 });

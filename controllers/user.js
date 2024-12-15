@@ -204,12 +204,10 @@ controller.sendResetLink = async (req, res) => {
         };
       
         await transporter.sendMail(mailOptions);
-        res.json({ success: true, message: 'Email đã được gửi!' });
-        return true;
+        res.status(201).json({ success: true, message: 'Email đã được gửi!' });
       } catch (error) {
         console.error(error);
         res.status(500).json({ success: false, message: 'Không thể gửi email.' });
-        return false;
       }
       
 };
@@ -237,21 +235,21 @@ controller.checkToken = async (req, res) => {
 
 controller.resetPassword = async (req, res) => {
     const { email, password, confirmPassword } = req.body;
-  
-    if (password !== confirmPassword) {
-      return res.status(400).send("Mật khẩu không khớp.");
+    try {
+        // Hash mật khẩu mới
+        const hashedPassword = await bcrypt.hash(password, 10);
+    
+        // Cập nhật mật khẩu trong database
+        await models.User.update({ password: hashedPassword }, { where: { email } });
+    
+        // Xóa token sau khi sử dụng
+        await models.Token.destroy({ where: { email } });
+        res.status(201).json({ success: true, message: 'Mật khẩu đã được thay đổi thành công.' });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Không thể đổi mật khẩu' });
     }
-  
-    // Hash mật khẩu mới
-    const hashedPassword = await bcrypt.hash(password, 10);
-  
-    // Cập nhật mật khẩu trong database
-    await models.User.update({ password: hashedPassword }, { where: { email } });
-  
-    // Xóa token sau khi sử dụng
-    await models.Token.destroy({ where: { email } });
-  
-    res.send("Mật khẩu đã được thay đổi thành công.");
 }
 
 //follow user
