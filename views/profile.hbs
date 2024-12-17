@@ -56,42 +56,37 @@
                                 </div>
                             </div>
                             <div class="container-post">
+                                {{#each threads}}
                                 <div class="post-1">
                                     <div class="inner-content">
                                         <div class="inner-image">
-                                            <img height="100%" width="100%" src="{{user.profile_picture}}" alt="image">
+                                            <img height="100%" width="100%" src="{{../user.profile_picture}}" alt="image">
                                         </div>
                                         <div class="inner-name">
-                                            <span class="user-name">{{user.username}}</span>
-                                            <span class="time">10h</span>
+                                            <span class="user-name">{{../user.username}}</span>
+                                            <span class="time">{{timeAgo}}</span>
                                         </div>
                                         <div class="inner-tus">
-                                            <span>Milwaukee Bucks try to snap a 4-game losing streak tonight:
-                                                ⛑️injury report
-                                                👥starters
-                                                💰odds
-                                                and more 🧵 below NBAThreads</span>
+                                            <span>{{content}}</span>
                                         </div>
+                                        {{#if image_url}}
+                                            <div class="inner-thread-image">
+                                                <img src="{{image_url}}" alt="Thread Image" class="thread-image">
+                                            </div>
+                                        {{/if}}
                                         <div class="inner-reaction">
                                             <div class="inner-love">
                                                 <i class="fa-regular fa-heart"></i>
-                                                <span>2</span>
+                                                <span>{{likes-threads.length}}</span>
                                             </div>
                                             <div class="inner-comment">
                                                 <i class="fa-regular fa-comment"></i>
-                                                <span>14</span>
-                                            </div>
-                                            <div class="inner-repost">
-                                                <i class="fa-solid fa-repeat"></i>
-                                                <span>1</span>
-                                            </div>
-                                            <div class="inner-direct">
-                                                <i class="fa-solid fa-location-arrow"></i>
-                                                <span></span>
+                                                <span>{{comments-threads.length}}</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                {{/each}}
                             </div>
                         </div>
                     </div>

@@ -22,15 +22,16 @@
 /* Pop-up profile */
 .popup-container {
     display: none;
-    position: absolute;
+    position: fixed; /* Thay absolute thành fixed */
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); /* Giữ popup ở giữa màn hình */
     width: 40%;
     height: 35%;
     background-color: rgba(24,24,24);
     border: 2px black solid;
     border-radius: 20px;
+    z-index: 1000; /* Đảm bảo popup luôn nổi trên các phần tử khác */
 }
 
 .popup {

@@ -205,6 +205,19 @@ div {
     margin: 1rem;
 }
 
+.post-1 {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.post-1:not(:last-child) {
+    border-bottom: 1px #404040 solid;
+}
+
+.inner-thread-image {
+    margin-left: 40px;
+}
+
 .inner-content {
     position: relative;
 }
