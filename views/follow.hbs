@@ -27,19 +27,25 @@
                         <div class="inner-profile">
                             <div class="inner-profile-head">
                                 <div class="name">
-                                Duke
+                                {{user.username}}
                                 </div>
                                 <div class="profile-pic">
-                                <img height="100%" width="100%" alt="" src="/assets/image/cat.jpg">  
+                                <img height="100%" width="100%" alt="" src="{{user.profile_picture}}">  
                                 </div>
                             </div>
                             <div class="inner-profile-follower" role="button">
-                                 12 người theo dõi
+                                 {{totalFollowers}} người theo dõi
                             </div>
                             <div class="follow-call">
+                                {{#if isFollowing}}
+                                <div class="follow" role="button">
+                                    Đang theo dõi
+                                </div>
+                                {{else}}
                                 <div class="follow" role="button">
                                     Theo dõi
                                 </div>
+                                {{/if}}
                                 <div class="call" role="button">
                                     Nhắc đến
                                 </div>
@@ -49,7 +55,7 @@
                             </div>
                             <div class="create-thread">
                                 <a class="create-thread-logo" href="#">
-                                    <img height="100%" width="100%" alt="" src="/assets/image/cat.jpg">  
+                                    <img height="100%" width="100%" alt="" src="{{user.profile_picture}}">  
                                 </a>
                                 <div class="create-thread-middle">
                                     Có gì mới?
@@ -58,44 +64,39 @@
                                     Đăng
                                 </div>
                             </div>
+                            {{#each threads}}
                             <div class="container-post">
                                 <div class="post-1">
                                     <div class="inner-content">
                                         <div class="inner-image">
-                                            <img height="100%" width="100%" src="/assets/image/cat.jpg" alt="image">
+                                            <img height="100%" width="100%" src="{{this.profile_picture}}" alt="image">
                                         </div>
                                         <div class="inner-name">
-                                            <span class="user-name">Duke</span>
-                                            <span class="time">10h</span>
+                                            <span class="user-name">{{this.username}}</span>
+                                            <span class="time">{{timeAgo this.created_at}}</span>
                                         </div>
                                         <div class="inner-tus">
-                                            <span>Milwaukee Bucks try to snap a 4-game losing streak tonight:
-                                                ⛑️injury report
-                                                👥starters
-                                                💰odds
-                                                and more 🧵 below NBAThreads</span>
+                                            <span>{{this.content}}</span>
+                                            {{#if this.image_url}}
+                                            <div class="inner-tus-image">
+                                                <img src="{{this.image_url}}" alt="">
+                                            </div>
+                                            {{/if}}
                                         </div>
                                         <div class="inner-reaction">
                                             <div class="inner-love">
                                                 <i class="fa-regular fa-heart"></i>
-                                                <span>2</span>
+                                                <span>{{this.totalLikes}}</span>
                                             </div>
                                             <div class="inner-comment">
                                                 <i class="fa-regular fa-comment"></i>
-                                                <span>14</span>
-                                            </div>
-                                            <div class="inner-repost">
-                                                <i class="fa-solid fa-repeat"></i>
-                                                <span>1</span>
-                                            </div>
-                                            <div class="inner-direct">
-                                                <i class="fa-solid fa-location-arrow"></i>
-                                                <span></span>
+                                                <span>{{this.totalComments}}</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            {{/each}}
                         </div>
                     </div>
                 </div>
@@ -107,6 +108,6 @@
             <!-- End Button Create threads -->
         </div>
     </div>
-    <script src="profile.js"></script>
+    <script src="/assets/js/profile.js"></script>
 </body>
 </html>

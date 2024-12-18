@@ -262,4 +262,44 @@ controller.loadThreadDetails = async (req, res) => {
         res.status(500).render('error', { message: 'Lỗi server' });
     }
 }
+//load view profile
+controller.viewProfile = async (req, res) => {
+    try {
+        const username = req.params.username;
+        const user = await models.User.findOne({ where: { username: username } });
+        if (!user) {
+            return res.redirect('/'); 
+        }
+
+        const threads = await models.Thread.findAll({
+            where: { user_id: user.id },
+            include: [
+                { model: models.Like, as: 'likes-threads' },
+                { model: models.Comment, as: 'comments-threads' },
+                { model: models.User, as: 'users-threads', attributes: ['username', 'profile_picture'] } 
+            ],
+            order: [['created_at', 'DESC']],
+        });
+        
+        const formattedThreads = threads.map((thread) => ({
+            ...thread.toJSON(),
+            totalLikes: thread['likes-threads'].length,
+            totalComments: thread['comments-threads'].length,
+            username: thread['users-threads'].username, 
+            profile_picture: thread['users-threads'].profile_picture, 
+        }));
+        
+        const followers = await models.Follow.findAll({ where: { followed_id: user.id } });
+        const isFollowing = followers.some(f => f.follower_id === parseInt(req.cookies.userId));
+        res.render('follow', {
+            user: user,
+            threads: formattedThreads,
+            totalFollowers: followers.length,
+            isFollowing: isFollowing,
+        });
+    } catch (error) {
+        console.error("Lỗi khi lấy thông tin người dùng:", error);
+        res.redirect('/'); 
+    }
+}
 module.exports = controller;

@@ -262,6 +262,18 @@ div {
     margin-bottom: 20px;
 }
 
+.section-one .container .profile .inner-profile .container-post .inner-tus-image {
+    height: 430px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.section-one .container .profile .inner-profile .container-post .inner-tus-image img {
+    height: 430px;
+    width: auto;        
+    border-radius: 8px;                                           
+}
+
 .inner-reaction {
     display: flex;
     margin-left: 28px;

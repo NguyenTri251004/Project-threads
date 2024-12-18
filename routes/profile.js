@@ -6,6 +6,7 @@ const path = require('path');
 const dayjs = require('dayjs'); // Import thư viện dayjs
 const relativeTime = require('dayjs/plugin/relativeTime'); // Plugin hiển thị thời gian tương đối
 dayjs.extend(relativeTime);
+const controllerLoad = require('../controllers/loadpage')
 
 router.get('/', async (req, res) => {
     const userId = req.cookies.userId;
@@ -179,4 +180,6 @@ router.get('/getFollowing', async (req, res) => {
         }))
     );
 });
+
+router.get('/@:username', controllerLoad.viewProfile)
 module.exports = router;
