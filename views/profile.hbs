@@ -57,18 +57,28 @@
                             </div>
                             <div class="container-post">
                                 {{#each threads}}
+                                {{#each threads}}
                                 <div class="post-1">
                                     <div class="inner-content">
                                         <div class="inner-image">
+                                            <img height="100%" width="100%" src="{{../user.profile_picture}}" alt="image">
                                             <img height="100%" width="100%" src="{{../user.profile_picture}}" alt="image">
                                         </div>
                                         <div class="inner-name">
                                             <span class="user-name">{{../user.username}}</span>
                                             <span class="time">{{timeAgo}}</span>
+                                            <span class="user-name">{{../user.username}}</span>
+                                            <span class="time">{{timeAgo}}</span>
                                         </div>
                                         <div class="inner-tus">
                                             <span>{{content}}</span>
+                                            <span>{{content}}</span>
                                         </div>
+                                        {{#if image_url}}
+                                            <div class="inner-thread-image">
+                                                <img src="{{image_url}}" alt="Thread Image" class="thread-image">
+                                            </div>
+                                        {{/if}}
                                         {{#if image_url}}
                                             <div class="inner-thread-image">
                                                 <img src="{{image_url}}" alt="Thread Image" class="thread-image">
@@ -78,14 +88,17 @@
                                             <div class="inner-love">
                                                 <i class="fa-regular fa-heart"></i>
                                                 <span>{{likes-threads.length}}</span>
+                                                <span>{{likes-threads.length}}</span>
                                             </div>
                                             <div class="inner-comment">
                                                 <i class="fa-regular fa-comment"></i>
+                                                <span>{{comments-threads.length}}</span>
                                                 <span>{{comments-threads.length}}</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                {{/each}}
                                 {{/each}}
                             </div>
                         </div>
@@ -98,8 +111,10 @@
             {{> button-create-threads}}
             <!-- End Button Create threads -->
 
+
         </div>
     </div>
+    <!-- Follow popup-->
     <!-- Follow popup-->
     <div class="popup-follow-container" id="popupFollowContainer">  
         <div class="popup-follow-header">
