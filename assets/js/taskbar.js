@@ -30,7 +30,7 @@ if (!menu.contains(event.target) && !trigger.contains(event.target)) {
 document.addEventListener("DOMContentLoaded", function () {
     const currentUrl = window.location.pathname;
 
-    const menuItems = document.querySelectorAll(".inner-home, .inner-sreach, .inner-love, .inner-people");
+    const menuItems = document.querySelectorAll(".inner-home, .inner-sreach, .inner-love-react, .inner-people");
 
     menuItems.forEach(function (item) {
         const link = item.querySelector("a"); 
