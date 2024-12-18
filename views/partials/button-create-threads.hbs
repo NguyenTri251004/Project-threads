@@ -1,0 +1,37 @@
+<link rel="stylesheet" href="/assets/css/button-create-threads.css">
+    <div class="button position-fixed text-center d-flex justify-content-center align-items-center" role="button" onclick="openPopup()">
+            <i class="fa-solid fa-plus mx-auto"></i>  
+    </div>
+    <div class="popup-container" id="popupContainer">
+                <form class="popup" id="popupForm" action="/profile/create-thread" method="POST" enctype="multipart/form-data">
+                    <div class="popup-header">
+                        <div class="popup-cancel" role="button" onclick="closePopup()">
+                            Hủy
+                        </div>
+                        <div class="popup-new">
+                            Thread mới 
+                        </div>
+                    </div>
+                    <div class="popup-body">
+                        <div class="popup-profile">
+                            <div class="popup-profile-pic">
+                                <img height="100%" width="100%" alt="" src="/assets/image/cat.jpg"> 
+                            </div>
+                            <div class="popup-profile-left">
+                                <div class="popup-profile-name">
+                                    duke
+                                </div>
+                                <textarea class="input" name="content" placeholder="Có gì mới?"></textarea>
+                                <div class="popup-extras">
+                                    <label for="uploadImage" class="upload-label">
+                                        <i style="color: #5a5b5b;" class="fa fa-image"></i> 
+                                    </label>
+                                    <input type="file" id="uploadImage" name="image" accept="image/*">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit">Đăng</button>
+                </form>
+            </div>
+<script src="/assets/js/button-create-threads.js"></script>

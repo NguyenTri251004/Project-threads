@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profile</title>
+    <link rel="icon" href="./assets/image/logo.jpeg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />  
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/css/base.css">
+    <link rel="preload" href="/assets/css/profile.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="/assets/css/profile.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="homepage">  
+            <!-- Taskbar-->
+            {{> taskbar}}
+            <!--End Taskbar-->
+
+             <!-- Section one -->
+            <div class="section-one">
+                <div class="container">
+                    <div class="header">
+                        Trang cá nhân
+                    </div>
+                    <div class="profile">
+                        <div class="inner-profile">
+                            <div class="inner-profile-head">
+                                <div class="name">
+                                {{user.username}}
+                                </div>
+                                <div class="profile-pic">
+                                <img height="100%" width="100%" alt="" src="{{user.profile_picture}}">  
+                                </div>
+                            </div>
+                            <div class="bio">
+                                {{user.bio}}
+                            </div>
+                            <button id="open-popup-btn" class="inner-profile-follower" onclick="openFollowPopup()">{{totalFollowers}} người theo dõi</button>
+                            <div id="open-popup-modify" class="modify-profile" role="button" onclick="openModifyPopup()">
+                                Chỉnh sửa trang cá nhân
+                            </div>
+                            <div class="thread">
+                                Thread
+                            </div>
+                            <div class="create-thread">
+                                <a class="create-thread-logo" href="#">
+                                    <img height="100%" width="100%" alt="" src="{{user.profile_picture}}">  
+                                </a>
+                                <div class="create-thread-middle">
+                                    Có gì mới?
+                                </div>
+                                <div class="create-thread-submit" role="button" onclick="openPopup()">
+                                    Đăng
+                                </div>
+                            </div>
+                            <div class="container-post">
+                                {{#each threads}}
+                                <div class="post-1">
+                                    <div class="inner-content">
+                                        <div class="inner-image">
+                                            <img height="100%" width="100%" src="{{../user.profile_picture}}" alt="image">
+                                        </div>
+                                        <div class="inner-name">
+                                            <span class="user-name">{{../user.username}}</span>
+                                            <span class="time">{{timeAgo}}</span>
+                                        </div>
+                                        <div class="inner-tus">
+                                            <span>{{content}}</span>
+                                        </div>
+                                        {{#if image_url}}
+                                            <div class="inner-thread-image">
+                                                <img src="{{image_url}}" alt="Thread Image" class="thread-image">
+                                            </div>
+                                        {{/if}}
+                                        <div class="inner-reaction">
+                                            <div class="inner-love">
+                                                <i class="fa-regular fa-heart"></i>
+                                                <span>{{likes-threads.length}}</span>
+                                            </div>
+                                            <div class="inner-comment">
+                                                <i class="fa-regular fa-comment"></i>
+                                                <span>{{comments-threads.length}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{/each}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <!-- End Section One -->
+
+            <!-- Button Create threads -->
+            {{> button-create-threads}}
+            <!-- End Button Create threads -->
+
+        </div>
+    </div>
+    <!-- Follow popup-->
+    <div class="popup-follow-container" id="popupFollowContainer">  
+        <div class="popup-follow-header">
+            <div class="follower" role="button" onclick="showFollowers()">
+                <h6>Người theo dõi</h6>
+                <p>{{totalFollowers}}</p>
+            </div>
+            <div class="following" role="button" onclick="showFollowing()">
+                <h6>Đang theo dõi</h6>
+                <p>{{totalFollowing}} </p>
+            </div>
+        </div>
+        <div class="popup-follow-body" id="popupFollowBody">
+            {{!-- <div class="follow-item">
+                <div class="follower-profile-pic">
+                    <img height="100%" width="100%" alt="" src="{{profile_picture}}"> 
+                </div>
+                <div class="follower-name">
+                    <div class="username">
+                        {{username}}
+                    </div>
+                    <div class="subname">
+                        {{subname}}
+                    </div>
+                </div>
+                <div class="follow-button" role="button">
+                    {{#if isFollowing}}Đang theo dõi{{else}}Theo dõi{{/if}}
+                </div>
+            </div> --}}
+        </div>
+    </div>
+    <!-- End Follow popup-->
+    <!-- Modify popup-->
+    <div class="popup-Modify-container" id="popupModifyContainer">  
+        <form action="/profile/update" method="post" enctype="multipart/form-data">
+            <div class="popup-Modify-top">
+                <div class="Modify-name">
+                    <label for="name">Tên:</label>
+                    <input type="text" id="name" name="name" placeholder="Nhập tên mới">
+                </div>
+                <div class="Modify-profile-pic">
+                    <label for="profile-pic">
+                        Ảnh đại diện: 
+                        <i class="fa fa-upload" aria-hidden="true" style="margin-left: 5px;"></i>
+                    </label>
+                    <input type="file" id="profile-pic" name="profile-pic" accept="image/*">
+                </div>
+            </div>
+            <div class="popup-Modify-bottom">
+                <div class="Modify-bio">
+                    <label for="bio">Tiểu sử:</label>
+                    <textarea id="bio" name="bio" placeholder="Nhập tiểu sử mới" rows="4"></textarea>
+                </div>
+            </div>
+            <button class="ModifyButton" type="submit">Chỉnh sửa</button>
+        </form>
+    </div>
+
+        
+    <!-- End Modify popup-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="/assets/js/profile.js">
+    </script>
+</body>
+</html>

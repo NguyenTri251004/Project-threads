@@ -1,0 +1,23 @@
+:root {
+    --color-bg: #0A0A0A;
+    --color--text: #FFFFFF;
+    --color-icons: #565656;
+    --color-hover: #F4F5F7;
+    --color-bg-status: #181818;
+}
+
+
+
+body {
+    background: var(--color-bg);
+    font-family: system-ui, Helvetica, Arial, sans-serif;
+    color: var(--color--text);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration: none;
+}

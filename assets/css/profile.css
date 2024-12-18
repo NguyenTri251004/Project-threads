@@ -1,0 +1,479 @@
+div {
+    display: block;
+}
+
+.container-fluid .homepage {
+    display: flex;
+    justify-content: space-between;
+}
+/**/
+
+.section-one .container {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.section-one .container .header {
+    top: 0;  
+    display: flex;
+    justify-content: center; 
+    text-align: center;
+    height: 60px;
+    width: 100%;
+    align-items: center;
+    background: var(--color-bg);
+    z-index: 999;
+}
+
+.section-one .container .header a {
+    Text-decoration: none;
+}
+
+.section-one .container .header span {
+    color: var(--color--text);
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.section-one { 
+    width: 700px; 
+
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    margin: 0 auto; 
+}
+
+.profile, .inner-profile {
+    width:700px;
+    height: 100%;
+    border-radius: 20px 20px 0 0;
+    border: 1px solid #2D2D2D;
+    background: var(--color-bg-status);
+}
+
+.inner-profile-head {
+    padding: 16px 24px 10px;
+}
+
+.inner-profile-follower, .modify-profile {
+    margin: 0 24px;
+    background-color: inherit;
+    
+}
+
+.inner-profile-follower {
+    outline: none; 
+    border: none;  
+}
+
+.inner-profile-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) max-content;
+    max-height: 150px;
+}
+
+.name {
+    font-size:xx-large;
+    font-weight: bold;
+    grid-column-start: 1;
+}
+
+.profile-pic {
+    width: 80px;
+    height: 80px;
+    top: 0;
+    left: 0;
+    grid-column-start: 2;
+}
+
+.profile-pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.inner-profile-follower {
+    margin-top: 1rem;
+    color: #474747
+}
+
+.modify-profile {
+    font-weight: bold;
+    height: 40px;
+    border: 0.5px solid #282828;
+    border-radius: 12px;
+    margin-top: 30px;
+    text-align: center;
+    align-items: center;
+    outline: none;
+    box-shadow: none;
+    line-height: 40px;
+}
+
+.follow-call {
+    justify-content: space-around;
+    display: flex;
+}
+
+.follow {
+    font-weight: bold;
+    height: 40px;
+    border: 0.5px solid #282828;
+    border-radius: 12px;
+    margin-top: 30px;
+    text-align: center;
+    align-items: center;
+    outline: none;
+    box-shadow: none;
+    line-height: 40px;
+    width: 47%;
+    background-color: white;
+    color: black;
+}
+
+.call {
+    font-weight: bold;
+    height: 40px;
+    border: 0.5px solid #282828;
+    border-radius: 12px;
+    margin-top: 30px;
+    text-align: center;
+    align-items: center;
+    outline: none;
+    box-shadow: none;
+    line-height: 40px;
+    width: 47%;
+    background-color: black;
+    color: white;
+}
+
+.thread {
+    margin: 1rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.create-thread  {
+    border-top:  1px solid #474747;
+    border-bottom:  1px solid #474747;
+    padding-top:  1rem;
+    padding-bottom: 0.5rem;
+    margin: 0 1rem;
+    position: relative;
+    display: flex;
+}
+
+.create-thread-logo {
+    margin:10px 0;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 0;
+    left: 0;
+}
+
+.create-thread-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.create-thread-middle {
+    margin-left: 50px;
+    margin-bottom: 10px;
+    width: 400px;
+    color: #474747
+}
+
+.create-thread-submit {
+    position: absolute;
+    top: 0.5rem;
+    right: 0;
+    border: 0.5px solid #282828;
+    border-radius: 12px;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    display: flex;
+    margin-right: 10px;
+}
+
+.container-post  {
+    margin: 1rem;
+}
+
+.post-1 {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.post-1:not(:last-child) {
+    border-bottom: 1px #404040 solid;
+}
+
+.inner-thread-image {
+    margin-left: 40px;
+}
+
+.inner-content {
+    position: relative;
+}
+
+.inner-image {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 0;
+    left: 0;
+    
+}
+
+.inner-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.inner-name {
+    margin-left: 50px;
+    margin-bottom: 10px;
+}
+
+.user-name {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.time {
+    color: var(--color-icons);
+}
+
+.inner-tus {
+    margin-left: 40px;
+    margin-bottom: 20px;
+}
+
+.section-one .container .inner-status .inner-content .inner-tus span {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.inner-reaction {
+    display: flex;
+    margin-left: 28px;
+    margin-top: 10px;
+    justify-content: flex-start;
+}
+
+.inner-love, .inner-comment, .inner-repost, .inner-direct {
+    padding: 0 1rem;
+}
+
+
+
+.popup-follow-container {
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 550px;
+    max-height: 80%;
+    background-color: rgba(24,24,24); 
+    border: 2px black solid;
+    border-radius: 20px;
+    overflow-y: auto;
+    overflow: hidden;
+}
+
+.popup-follow-header {
+    position: sticky; 
+    top: 0; 
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-items: center;
+    width: 100%;
+}
+
+.popup-follow-body {
+    flex: 1; 
+    overflow-y: auto;
+    padding: 0;
+    margin: 0;
+}
+
+.follower, .following {
+    width: 50%;
+    justify-items: center;
+    border-bottom: 1px rgb(51,51,51) solid;
+}
+
+.follower h6, .following h6 {
+    margin-top: 10px;
+    margin-bottom: unset ;
+    color: rgb(119,119,119);
+}
+
+.follower p, .following p {
+    margin-top: unset ;
+    color: rgb(119,119,119);
+}
+
+.follow-item {
+    border-bottom: 1px solid #333;
+    display: flex;
+    padding: 15px;
+}
+
+.follow-item:last-child {
+    border-bottom: none;
+}
+
+.follower-name {
+    margin-left: 10px;
+}
+
+.username {
+    color: white;
+    font-weight: bold;
+}
+
+.subname {
+    color: rgb(119,119,119);
+}
+
+.follow-button {
+
+    padding: 10px;
+    border: 1px rgb(51,51,51) solid;
+    border-radius: 10px;
+    margin-left: 50%;
+    color: rgb(119,119,119);
+    font-weight: bold;
+}
+
+.follower-profile-pic {
+    width: 40px;
+    height: 40px;
+}
+
+.follower-profile-pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.bio {
+    margin: 5px 24px;
+}
+
+@media (max-width: 700px) {
+    .container-fluid {
+        padding: 0 !important ;
+    }
+    .homepage {
+        flex-direction: column;
+    }
+    .homepage .inner-taskbar .inner-link {
+        display: none !important;
+    }
+    .homepage .inner-taskbar .inner-logo {
+        display: none !important;
+    }
+    .container-fluid .homepage .inner-taskbar { 
+        position: fixed !important;
+        bottom: 0 !important;
+        top: unset;
+        width: 100% !important;
+        height: 70px !important; 
+        background: var(--color-bg) !important; 
+        z-index: 10 !important;
+    }
+    .homepage .inner-taskbar .inner-menu {
+        flex-direction: row !important;
+    }
+
+    .section-one, .container, .profile, .inner-profile {
+        width: 100%;
+        max-width: unset;
+        padding: unset;
+    }
+}
+
+
+
+.popup-Modify-container {
+    display: none; 
+    width: 400px;
+    background-color: #161616;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    
+}
+
+.popup-Modify-container form {
+    width: 100%;
+}
+
+.popup-Modify-top, .popup-Modify-bottom {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.Modify-name, .Modify-profile-pic, .Modify-bio {
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 8px;
+    outline: none;
+    box-shadow: none;
+    border-bottom: 1px solid #333333;
+
+    font-size: 14px;
+    background-color: inherit;
+    color: white;
+}
+
+input[type="file"] {
+    font-size: 14px;
+    
+}
+
+
+
+.ModifyButton {
+    background-color: #ffffff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #000;
+    text-align: center;
+    width: 100%;
+}
+
+.ModifyButton:hover {
+    background-color: #ffffff;
+}
