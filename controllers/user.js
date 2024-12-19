@@ -256,9 +256,23 @@ controller.resetPassword = async (req, res) => {
 controller.followUser = async (req, res) => {
     const { followerId, followedId } = req.body;
     try {
+        const follower = await models.User.findOne({
+            where: { id: followerId },
+            attributes: ['username']
+        });
+
+        if (!follower) {
+            return res.status(404).send('Người theo dõi không tồn tại.');
+        }
         await models.Follow.create({
             follower_id: followerId,
             followed_id: followedId
+        });
+
+        await models.Notification.create({
+            user_id: followedId,
+            type: 'new_follower',
+            content: `${follower.username} started following you.`
         });
         res.status(200).send('Follow thành công!');
     } catch (error) {
@@ -285,7 +299,6 @@ controller.unFollowUser = async (req, res) => {
 //like thread
 controller.likeThreads = async (req, res) => {
     const threadId = req.params.id_thread;
-    console.log(threadId);
     const userId = req.cookies.userId;
     if (!userId) {
         return res.status(401).json({ message: 'Bạn cần đăng nhập !' });
@@ -294,7 +307,9 @@ controller.likeThreads = async (req, res) => {
         const existingLike = await models.Like.findOne({
             where: { thread_id: threadId, user_id: userId },
         });
-
+        const userLiking = await models.User.findByPk(userId);
+        
+        const threadOwner = await models.Thread.findByPk(threadId);
         if (existingLike) {
             await existingLike.destroy();
 
@@ -305,7 +320,11 @@ controller.likeThreads = async (req, res) => {
                 thread_id: threadId,
                 user_id: userId,
             });
-
+            await models.Notification.create({
+                user_id: threadOwner.user_id, 
+                type: 'like', 
+                content: `${userLiking.username} liked your thread.`,
+            });
             const totalLikes = await models.Like.count({ where: { thread_id: threadId } });
             return res.json({ liked: true, totalLikes });
         }
@@ -329,13 +348,32 @@ controller.commentThreads = async (req, res) => {
     if (!threadId) {
         return res.status(400).json({ message: "Không tìm thấy threadId!" });
     }
+
     const userId = req.cookies.userId;
-    await models.Comment.create({
-        user_id: userId,
-        thread_id: threadId,
-        content: clearComment,
-    });
-    return res.status(200).json({ message: "Bình luận đã được lưu thành công!" });
+    try {
+        await models.Comment.create({
+            user_id: userId,
+            thread_id: threadId,
+            content: clearComment,
+        });
+        const userCommenting = await models.User.findByPk(userId);
+        
+        const threadOwner = await models.Thread.findByPk(threadId);
+        
+        if (!threadOwner) {
+            return res.status(404).json({ message: 'Thread không tồn tại!' });
+        }
+
+        await models.Notification.create({
+            user_id: threadOwner.user_id, 
+            type: 'comment', 
+            content: `${userCommenting.username} commented on your thread.`, 
+        });
+        return res.status(200).json({ message: "Bình luận đã được lưu thành công!" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Lỗi server' });
+    }
 }
 
 module.exports = controller;

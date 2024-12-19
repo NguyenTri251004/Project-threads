@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       User.hasMany(models.Thread, { foreignKey: "user_id", as: 'users-threads' }); 
       User.hasMany(models.Comment, { foreignKey: "user_id", as: 'users-comments' }); 
+      User.hasMany(models.Notification, { foreignKey: "user_id", onDelete: "CASCADE" });
     }
   }
   User.init(

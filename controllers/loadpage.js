@@ -302,4 +302,33 @@ controller.viewProfile = async (req, res) => {
         res.redirect('/'); 
     }
 }
+
+controller.loadActivity = async (req, res) => {
+    try {
+        const currentUserId = req.cookies.userId;
+        const notifications = await models.Notification.findAll({
+            where: { user_id: currentUserId },
+            include: [
+                {
+                    model: models.User,
+                    attributes: ["username", "profile_picture"], 
+                },
+            ],
+            order: [["created_at", "DESC"]], 
+        });
+        const formattedNotifications = notifications.map((notification) => ({
+            id: notification.id,
+            type: notification.type,
+            content: notification.content,
+            isRead: notification.is_read,
+            createdAt: notification.created_at,
+            username: notification.User ? notification.User.username : null,
+            profilePicture: notification.User ? notification.User.profile_picture : null,
+        }));
+        res.render("activity", { notifications: formattedNotifications });
+    } catch (error) {
+        console.error("Lỗi không load được activity:", error);
+        res.status(500).json({ message: "Lỗi server." });
+    }
+}
 module.exports = controller;

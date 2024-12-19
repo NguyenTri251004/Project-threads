@@ -19,9 +19,9 @@
             <!-- End Taskbar -->
 
             <!-- Activity -->
-            <div class="activity d-flex justify-content-center align-items-center mx-auto my-4" >
+            <div class="activity d-flex justify-content-center mx-auto my-4" >
                 <div class="container w-100">
-                    <div class="header d-flex justify-content-center align-items-center text-center w-100 mb-2">
+                    <div class="header d-flex justify-content-center text-center w-100 mb-2">
                         <div class="inner-content d-flex align-items-center p-2">
                             <span class="fs-7 fw-medium">Activity</span>
                             <div class="inner-logo d-none align-items-center justify-content-center overflow-hidden">
@@ -57,45 +57,31 @@
                                 <a href="#"><span>Reposts</span></a>
                             </div>
                         </div>
+                        {{#each notifications}}
                         <div class="container-post w-100 d-flex">
                             <div class="inner-image">
-                                <img src="/assets/image/kewtiie.jpg" class="w-100 h-auto rounded-circle object-fit-cover" alt="image">
+                                <img src="{{profilePicture}}" class="w-100 h-auto rounded-circle object-fit-cover" alt="image">
                             </div>
                             <div class="inner-content w-100">
                                 <div class="inner-wrap d-flex justify-content-between">
                                     <div class="inner-name d-flex flex-column">
                                         <div>
-                                            <span class="user-name fs-6 fw-medium mb-1">kewtiie</span>
-                                            <span class="time">17h</span>
+                                            <span class="user-name fs-6 fw-medium mb-1">{{username}} </span>
+                                            <span class="time">{{timeAgo createdAt}} </span>
                                         </div>
-                                        <span class="sub-title fs-6">Picked for you</span>
-                                    </div>
-                                </div>
-                                <div class="inner-activity-content mt-3">
-                                    <span>Sunsets are sky poetry ✨</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="container-post w-100 d-flex">
-                            <div class="inner-image">
-                                <img src="/assets/image/salimhwg.jpg" class="w-100 h-auto rounded-circle object-fit-cover" alt="image">
-                            </div>
-                            <div class="inner-content w-100">
-                                <div class="inner-wrap d-flex justify-content-between">
-                                    <div class="inner-name d-flex flex-column">
-                                        <div>
-                                            <span class="user-name fs-6 fw-medium mb-1">salimhwg</span>
-                                            <span class="time">5h</span>
-                                        </div>
-                                        <span class="sub-title fs-6">Follow suggestion</span>
+                                        <span class="sub-title fs-6">{{type}}</span>
                                     </div>
                                     <div class="inner-follow d-flex justify-content-center align-items-center">
-                                        <span class ="d-flex align-items-center justify-content-center fw-medium">Follow</span>
-                                    </div>
+                                    <span class ="d-flex align-items-center justify-content-center fw-medium">Delete</span>
+                                </div>
+                                </div>
+                                <div class="inner-activity-content mt-3">
+                                        <span>{{content}}</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="container-post w-100 d-flex">
+                        {{/each}}
+                        {{!--  <div class="container-post w-100 d-flex">
                             <div class="inner-image">
                                 <img src="/assets/image/meichannnnn.jpg" class="w-100 h-auto rounded-circle object-fit-cover" alt="image">
                             </div>
@@ -213,7 +199,7 @@
                                     <span>Good morning</span>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
