@@ -51,6 +51,21 @@ controller.loginUsers = async (req, res) => {
             return res.render("index", { errorMessage: "Sai mật khẩu" });
         }
 
+        const unreadNotifications = await models.Notification.findAll({
+            where: {
+                user_id: user.id,
+                is_read: false,
+            },
+        });
+
+        if (unreadNotifications.length > 0) {
+            // Nếu có thông báo chưa đọc, set cookie is_read=false
+            res.cookie('is_read', 'false', { maxAge: 3600000, httpOnly: false });
+        } else {
+            // Nếu không có thông báo chưa đọc, set cookie is_read=true
+            res.cookie('is_read', 'true', { maxAge: 3600000, httpOnly: false });
+        }
+
         res.cookie('userId', user.id, { maxAge: 3600000, httpOnly: false });
         res.redirect("/home");
 
@@ -379,5 +394,25 @@ controller.commentThreads = async (req, res) => {
         res.status(500).json({ message: 'Lỗi server' });
     }
 }
+
+controller.deleteNotification = async (req, res) => {
+    try {
+      const notificationId = req.params.id;
+      const notification = await models.Notification.findByPk(notificationId);
+  
+      if (!notification) {
+        return res.status(404).json({ message: "Notification not found" });
+      }
+  
+      // Xóa thông báo
+      await notification.destroy();
+      res.status(200).json({ message: "Notification deleted successfully" });
+    } catch (error) {
+      console.error("Error deleting notification:", error);
+      res.status(500).json({ message: "Server error" });
+    }
+  };
+
+
 
 module.exports = controller;

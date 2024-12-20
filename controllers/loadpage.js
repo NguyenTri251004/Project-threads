@@ -329,6 +329,13 @@ controller.loadActivity = async (req, res) => {
             ],
             order: [["created_at", "DESC"]], 
         });
+
+        await models.Notification.update(
+            { is_read: true }, // Cập nhật trạng thái 'is_read'
+            { where: { user_id: currentUserId } } // Áp dụng cho các thông báo của người dùng hiện tại
+        );
+
+
         const formattedNotifications = notifications.map((notification) => ({
             id: notification.id,
             type: notification.type,
@@ -338,6 +345,7 @@ controller.loadActivity = async (req, res) => {
             username: notification.User ? notification.User.username : null,
             profilePicture: notification.User ? notification.User.profile_picture : null,
         }));
+        res.cookie('is_read', 'true', { maxAge: 3600000, httpOnly: false }); 
         res.render("activity", { notifications: formattedNotifications, user });
     } catch (error) {
         console.error("Lỗi không load được activity:", error);

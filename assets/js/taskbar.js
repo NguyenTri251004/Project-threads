@@ -43,3 +43,23 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+window.onload = function() {
+    // Lấy trạng thái is_read từ cookie
+    const isRead = getCookie("is_read");
+    // Chọn phần tử hình tròn đỏ nhỏ
+    const unreadIndicator = document.querySelector('.unread-indicator');
+
+    // Nếu thông báo chưa đọc (is_read=false), hiển thị hình tròn đỏ
+    if (isRead === "false" && unreadIndicator) {
+        unreadIndicator.style.display = "block"; // Hiển thị hình tròn đỏ
+    } else {
+        unreadIndicator.style.display = "none"; // Ẩn hình tròn đỏ nếu đã đọc
+    }
+};
+
+// Hàm lấy giá trị cookie
+function getCookie(name) {
+    let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    if (match) return match[2];
+}

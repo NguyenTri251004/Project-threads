@@ -72,6 +72,17 @@
     /* transition: all 0.3s ease;  */
 }
 
+.unread-indicator {
+    position: absolute;
+    top: 3px; 
+    right: 3px; 
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+    display: none; 
+}
+
 div.hover-2:hover i {
     color: #FFF !important;
 }
