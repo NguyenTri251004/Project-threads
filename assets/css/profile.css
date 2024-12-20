@@ -188,6 +188,10 @@ div {
     margin-right: 10px;
 }
 
+.container-post:not(:last-child)  {
+    border-bottom: 1px #474747 solid ;
+}
+
 .container-post  {
     margin: 1rem;
 }
