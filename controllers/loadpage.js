@@ -281,13 +281,24 @@ controller.viewProfile = async (req, res) => {
             order: [['created_at', 'DESC']],
         });
         
-        const formattedThreads = threads.map((thread) => ({
-            ...thread.toJSON(),
-            totalLikes: thread['likes-threads'].length,
-            totalComments: thread['comments-threads'].length,
-            username: thread['users-threads'].username, 
-            profile_picture: thread['users-threads'].profile_picture, 
-        }));
+        const userId = parseInt(req.cookies.userId);
+
+         const formattedThreads = await Promise.all(
+            threads.map(async (thread) => {
+                const isLiked = await models.Like.findOne({
+                    where: { thread_id: thread.id, user_id: userId },
+                });
+
+                return {
+                    ...thread.toJSON(),
+                    totalLikes: thread['likes-threads'].length,
+                    totalComments: thread['comments-threads'].length,
+                    username: thread['users-threads'].username,
+                    profile_picture: thread['users-threads'].profile_picture,
+                    isLiked: !!isLiked, 
+                };
+            })
+        );
         
         const followers = await models.Follow.findAll({ where: { followed_id: user.id } });
         const isFollowing = followers.some(f => f.follower_id === parseInt(req.cookies.userId));

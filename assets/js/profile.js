@@ -80,3 +80,12 @@ function showFollowing() {
                 .join('');
         });
 }
+
+//dieu huong toi details
+const postDivs = document.querySelectorAll('.container-post');
+postDivs.forEach(div => {
+    const id_thread = div.dataset.id;
+    div.addEventListener('click', async () => {
+        window.location.href = `/details/${id_thread}`;
+    });
+});

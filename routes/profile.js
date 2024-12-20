@@ -1,28 +1,23 @@
 const express = require('express');
 const router = express.Router();
-const models = require('../models'); // Import models (nếu cần)
-const multer = require('multer'); // Multer để xử lý upload file
+const models = require('../models'); 
+const multer = require('multer'); 
 const path = require('path');
-const dayjs = require('dayjs'); // Import thư viện dayjs
-const relativeTime = require('dayjs/plugin/relativeTime'); // Plugin hiển thị thời gian tương đối
-dayjs.extend(relativeTime);
 const controllerLoad = require('../controllers/loadpage')
 
 router.get('/', async (req, res) => {
     const userId = req.cookies.userId;
 
     if (!userId) {
-        return res.redirect('/'); // Nếu không có userId trong cookie, chuyển hướng đến trang đăng nhập
+        return res.redirect('/'); 
     }
 
     try {
-        // Truy vấn thông tin người dùng từ cơ sở dữ liệu
         const user = await models.User.findByPk(userId);
         if (!user) {
-            return res.redirect('/'); // Nếu không tìm thấy người dùng, chuyển hướng đến trang đăng nhập
+            return res.redirect('/'); 
         }
 
-        // Lấy danh sách thread của người dùng
         const threads = await models.Thread.findAll({
             where: { user_id: userId },
             include: [
@@ -35,14 +30,25 @@ router.get('/', async (req, res) => {
                     as: 'comments-threads',
                 },
             ],
-            order: [['created_at', 'DESC']], // Sắp xếp theo thời gian tạo giảm dần
+            order: [['created_at', 'DESC']], 
         });
 
-        // Tính toán thời gian tương đối
-        const formattedThreads = threads.map((thread) => ({
-            ...thread.toJSON(),
-            timeAgo: dayjs(thread.created_at).fromNow(), // Thêm trường thời gian tương đối
-        }));
+        const formattedThreads = await Promise.all(
+            threads.map(async (thread) => {
+                const isLiked = await models.Like.findOne({
+                    where: {
+                        thread_id: thread.id,
+                        user_id: userId,
+                    },
+                });
+
+                return {
+                    ...thread.toJSON(),
+                    isLiked: !!isLiked, 
+                };
+            })
+        );
+
         //so nguoi follower
         const followers = await models.Follow.findAll({
             where: { followed_id: userId },
@@ -53,11 +59,6 @@ router.get('/', async (req, res) => {
             where: { follower_id: userId },
             include: [{ model: models.User, as: 'Followed' }],
         });
-        //tinh tong so nguoi follow
-        // const totalFollowers = await models.Follow.count({
-        //     where: { followed_id: userId },
-        // });
-
         // Truyền thông tin người dùng và threads vào view
         res.render('profile', {
             user: user,
