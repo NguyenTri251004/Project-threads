@@ -116,6 +116,7 @@ div {
 .follow-call {
     justify-content: space-around;
     display: flex;
+    margin: 0 24px;
 }
 
 .follow {
@@ -129,35 +130,21 @@ div {
     outline: none;
     box-shadow: none;
     line-height: 40px;
-    width: 47%;
+    width: 100%;
     background-color: white;
     color: black;
 }
 
-.call {
-    font-weight: bold;
-    height: 40px;
-    border: 0.5px solid #282828;
-    border-radius: 12px;
-    margin-top: 30px;
-    text-align: center;
-    align-items: center;
-    outline: none;
-    box-shadow: none;
-    line-height: 40px;
-    width: 47%;
-    background-color: black;
-    color: white;
-}
-
 .thread {
-    margin: 1rem;
+    margin: 1rem 1rem 0;
     text-align: center;
     font-weight: bold;
+    padding-bottom: 20px;
+    border-bottom: 1px #474747 solid;
 }
 
 .create-thread  {
-    border-top:  1px solid #474747;
+    /* border-top:  1px solid #474747; */
     border-bottom:  1px solid #474747;
     padding-top:  1rem;
     padding-bottom: 0.5rem;
