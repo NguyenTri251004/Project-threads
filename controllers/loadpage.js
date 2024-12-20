@@ -6,6 +6,7 @@ const { Op } = require("sequelize");
 controller.loadSearch = async (req, res) => {
     try {
         const userId = req.cookies.userId;
+        const user = await models.User.findByPk(userId);
         const users = await models.User.findAll({
             where: { id: { [models.Sequelize.Op.ne]: userId } }
         });
@@ -22,7 +23,7 @@ controller.loadSearch = async (req, res) => {
             ava: user.profile_picture || '/assets/image/pic1.jpg', 
             isFollowing: followingIds.includes(user.id) 
         }));
-        res.render('search', { userList });
+        res.render('search', { userList,user });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Lỗi hệ thống! " });
@@ -306,6 +307,7 @@ controller.viewProfile = async (req, res) => {
 controller.loadActivity = async (req, res) => {
     try {
         const currentUserId = req.cookies.userId;
+        const user = await models.User.findByPk(currentUserId);
         const notifications = await models.Notification.findAll({
             where: { user_id: currentUserId },
             include: [
@@ -325,7 +327,7 @@ controller.loadActivity = async (req, res) => {
             username: notification.User ? notification.User.username : null,
             profilePicture: notification.User ? notification.User.profile_picture : null,
         }));
-        res.render("activity", { notifications: formattedNotifications });
+        res.render("activity", { notifications: formattedNotifications, user });
     } catch (error) {
         console.error("Lỗi không load được activity:", error);
         res.status(500).json({ message: "Lỗi server." });
