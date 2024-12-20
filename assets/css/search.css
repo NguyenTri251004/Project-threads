@@ -69,6 +69,12 @@
     height: 36px;
     margin-right: 10px;
 }
+.search .container .container-post .inner-content .inner-name a {
+    color: white;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
 .search .container .container-post .inner-content .inner-name .sub-name {
     color: #777777;
 }

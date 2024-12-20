@@ -320,11 +320,13 @@ controller.likeThreads = async (req, res) => {
                 thread_id: threadId,
                 user_id: userId,
             });
-            await models.Notification.create({
-                user_id: threadOwner.user_id, 
-                type: 'like', 
-                content: `${userLiking.username} liked your thread.`,
-            });
+            if (userLiking.id !== threadOwner.user_id) {
+                await models.Notification.create({
+                    user_id: threadOwner.user_id,
+                    type: 'like',
+                    content: `${userLiking.username} liked your thread.`,
+                });
+            }
             const totalLikes = await models.Like.count({ where: { thread_id: threadId } });
             return res.json({ liked: true, totalLikes });
         }
@@ -364,11 +366,13 @@ controller.commentThreads = async (req, res) => {
             return res.status(404).json({ message: 'Thread không tồn tại!' });
         }
 
-        await models.Notification.create({
-            user_id: threadOwner.user_id, 
-            type: 'comment', 
-            content: `${userCommenting.username} commented on your thread.`, 
-        });
+        if (userCommenting.id !== threadOwner.user_id) {
+            await models.Notification.create({
+                user_id: threadOwner.user_id,
+                type: "comment",
+                content: `${userCommenting.username} commented on your thread.`,
+            });
+        }
         return res.status(200).json({ message: "Bình luận đã được lưu thành công!" });
     } catch (error) {
         console.error(error);
