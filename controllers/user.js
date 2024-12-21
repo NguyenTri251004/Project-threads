@@ -105,6 +105,7 @@ controller.signUpUsers = async (req, res) => {
             email: cleanEmail,
             subname: username,
             password: hashedPassword,
+            profile_picture: '/assets/image/default.jpg',
             is_verified: false, // Tài khoản chưa xác minh
         });
 
