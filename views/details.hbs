@@ -52,6 +52,11 @@
                                     </div>
                                     <div class="inner-tus">
                                         <span>{{content}}</span>
+                                        {{#if img}}
+                                        <div class="inner-tus-image">
+                                            <img src="{{img}}" alt="img">
+                                        </div>
+                                        {{/if}}
                                     </div>
                                     <div class="inner-reaction">
                                         <div class="inner-love" data-id="{{this.threadId}}">
@@ -61,14 +66,6 @@
                                         <div class="inner-comment">
                                             <i class="fa-regular fa-comment"></i>
                                             <span>{{totalComments}}</span>
-                                        </div>
-                                        <div class="inner-repost">
-                                            <i class="fa-solid fa-repeat"></i>
-                                            <span>0</span>
-                                        </div>
-                                        <div class="inner-direct">
-                                            <i class="fa-solid fa-location-arrow"></i>
-                                            <span></span>
                                         </div>
                                     </div>
                                 </div>
@@ -116,11 +113,6 @@
                                     </div>
                                     <div class="inner-tus">
                                         <span>{{this.content}}</span>
-                                        {{#if this.img}}
-                                        <div class="inner-tus-image">
-                                            <img src="{{this.img}}" alt="img">
-                                        </div>
-                                        {{/if}}
                                     </div>
                                 </div>
                             </div>
