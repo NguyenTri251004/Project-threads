@@ -231,5 +231,14 @@
     .section-one .container .header .button-back {
         display: none !important;
     }
+    .section-one .container .inner-status .inner-content .inner-tus .inner-tus-image {
+        height: auto; 
+        max-width: 100%; 
+    }
+
+    .section-one .container .inner-status .inner-content .inner-tus .inner-tus-image img {
+        width: 100%; 
+        height: auto; 
+    }
 }
 /* End Section One */
