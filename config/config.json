@@ -1,12 +1,18 @@
 {
     "development": {
-      "username": "postgres",
-      "password": "minhtri257",
-      "database": "project-threads",
-      "host": "127.0.0.1",
+      "username": "projectthreads_user",
+      "password": "25kPIwBMaJU8O5fiQ9X89WAANmTqZh1C",
+      "database": "projectthreads",
+      "host": "dpg-ctjclstds78s73eos0s0-a.singapore-postgres.render.com",
       "dialect": "postgres",
       "timezone": "+07:00",
-      "port": 5432
+      "port": 5432,
+      "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
     },
     "test": {
       "username": "root",
