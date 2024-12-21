@@ -24,7 +24,7 @@ controller.loginUsers = async (req, res) => {
 
         if (!user.is_verified) {
             // Gửi lại email xác minh
-            const verificationLink = `http://localhost:3000/signup/verified?email=${encodeURIComponent(cleanEmail)}`;
+            const verificationLink = `https://project-threads.onrender.com/signup/verified?email=${encodeURIComponent(cleanEmail)}`;
             const transporter = nodemailer.createTransport({
                 service: 'Gmail',
                 auth: {
