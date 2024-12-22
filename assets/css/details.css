@@ -109,7 +109,8 @@
 .section-one .container .inner-status .inner-content .inner-tus .inner-tus-image img {
     height: 430px;
     width: auto;        
-    border-radius: 8px;                                           
+    border-radius: 8px;
+    aspect-ratio: 1/1;                                              
 }
 
 .section-one .container .inner-status .inner-content .inner-reaction {
