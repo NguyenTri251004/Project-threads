@@ -314,7 +314,7 @@ controller.viewProfile = async (req, res) => {
         res.redirect('/'); 
     }
 }
-
+//load activity
 controller.loadActivity = async (req, res) => {
     try {
         const currentUserId = req.cookies.userId;

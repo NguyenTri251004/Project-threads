@@ -408,6 +408,15 @@ div {
         max-width: unset;
         padding: unset;
     }
+    .section-one .container .profile .inner-profile .container-post .inner-content .inner-tus-image {
+        height: auto; 
+        max-width: 430px; 
+    }
+
+    .section-one .container .profile .inner-profile  .inner-content .inner-tus-image img {
+        width: 100%; 
+        height: auto; 
+    }
 }
 
 
