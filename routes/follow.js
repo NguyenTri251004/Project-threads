@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const controller = require("../controllers/user")
 
 // Route cho "/"
-router.get('/', (req, res) => {
-  res.render('follow');
-});
+router.post('/followUser', controller.followUser);
+router.delete('/unfollowUser', controller.unFollowUser);
 
 module.exports = router;
