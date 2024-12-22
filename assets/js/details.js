@@ -32,3 +32,12 @@ const threadId = window.location.pathname.split("/").pop();
         alert("Không thể gửi bình luận, vui lòng thử lại sau!");
     }
 });
+
+
+const buttonBack = document.querySelector('.button-back');
+
+if (buttonBack) {
+    buttonBack.addEventListener('click', () => {
+        window.location.href = '/home';
+    });
+}

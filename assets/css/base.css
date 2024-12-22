@@ -7,11 +7,19 @@
 }
 
 
-
+html, body {
+    height: 100%;
+    overflow-y: auto; 
+}
+.homepage {
+    min-height: 100vh; 
+    overflow-y: auto;  
+}
 body {
     background: var(--color-bg);
     font-family: system-ui, Helvetica, Arial, sans-serif;
     color: var(--color--text);
+    padding-bottom: 70px;
 }
 
 * {
