@@ -262,7 +262,8 @@ div {
 .section-one .container .profile .inner-profile .container-post .inner-tus-image img {
     height: 430px;
     width: auto;        
-    border-radius: 8px;                                           
+    border-radius: 8px;         
+    aspect-ratio: 1/1;                                      
 }
 
 .inner-reaction {
