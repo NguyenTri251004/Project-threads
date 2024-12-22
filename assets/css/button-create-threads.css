@@ -16,6 +16,10 @@
     .button {
         display: none !important;
     }
+
+    .popup-container {
+        width: 100% !important;
+    }
 }
 /* End Button Create Threads */
 
