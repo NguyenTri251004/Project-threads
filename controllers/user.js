@@ -191,7 +191,7 @@ controller.sendResetLink = async (req, res) => {
 
         // Tạo token ngẫu nhiên
         const token = crypto.randomBytes(20).toString('hex');
-        const resetLink = `http://localhost:3000/forgot/reset-password/${token}`;
+        const resetLink = `https://project-threads.onrender.com/forgot/reset-password/${token}`;
 
         // Lưu token vào database với thời hạn hiệu lực
         const tokenExpiry = new Date();
