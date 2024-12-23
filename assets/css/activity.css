@@ -14,8 +14,8 @@
 }
 
 .activity .container .container-post {
-    height: 100px;
-    padding: 16px 0px 0px 24px;
+    height: auto;
+    padding: 16px 0px 10px 24px;
 }
 
 .activity .container .container-post:not(:last-child) {
