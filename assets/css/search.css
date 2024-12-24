@@ -115,6 +115,15 @@
         left: 0;
         background: #0A0A0A;
         z-index: 10;
+        .inner-bars-mobile {
+            display: flex !important;
+            top: 15px;
+            right: 15px;
+            width: 48px;
+            height: 48px;
+            color: var(--color-icons);
+            font-size: 24px;
+        }
     }
     .search {
         width: 100% !important;
